@@ -21,4 +21,12 @@ public class InstructionSet {
         return istruzione.getDecodifica();
 
     }
+
+    public void esegui(int opCode , Sistema sistema) {
+
+        Istruzione istruzione = istruzioni.get(opCode);
+        if (istruzione==null) return  ;
+
+        istruzione.esegui( sistema );
+    }
 }

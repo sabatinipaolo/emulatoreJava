@@ -73,6 +73,8 @@ public class CPU {
         stato = "EXECUTE";
         ciclo = 0;
 
+        instructionSet.esegui(opCode, controller.sistema );
+
         controller.cpuHaFinitoCicloDiClock(stato);
         controller.cpuAspettaUnCicloDiClock();
     }
