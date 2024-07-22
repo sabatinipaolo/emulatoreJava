@@ -1,5 +1,5 @@
 public class CPU {
-    public String stato ;
+    public String stato;
     public int ciclo = 0;
 
     public Registro A;
@@ -50,7 +50,7 @@ public class CPU {
 
     public void fetch() {
         stato = "FETCH";
-        letturaDaMemoria( IP , IR);
+        letturaDaMemoria(IP, IR);
 
     }
 
@@ -62,6 +62,7 @@ public class CPU {
 
         int ipvalore = IP.getValore() + 1;
         IP.setValore(ipvalore++);
+
         controller.cpuHaFinitoCicloDiClock(stato);
         controller.cpuAspettaUnCicloDiClock();
     }
@@ -74,12 +75,13 @@ public class CPU {
         controller.cpuHaFinitoCicloDiClock(stato);
         controller.cpuAspettaUnCicloDiClock();
     }
-    public void letturaDaMemoria( Registro registroIndirizzo,Registro registroDestinazione){
+
+    public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
         ciclo = 0;
         int indirizzo = registroIndirizzo.getValore();
         MAR.setValore(indirizzo);
         RW.setToUno();
-        sistema.cpuVuoleLeggereDallaMemoria( indirizzo );
+        sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
         ciclo = 1;
         //aspetta che la ram renda disponibile il dato
@@ -98,13 +100,14 @@ public class CPU {
     }
 
     public String getStatoECiclo() {
-        return stato +"-"+ ciclo;
+        return stato + "-" + ciclo;
     }
 
-    public String getDecodifica(){
+    public String getDecodifica() {
         return decodifica;
     }
-     private void move(Registro sorg, Registro dest) {
+
+    private void move(Registro sorg, Registro dest) {
         dest.setValore(sorg.getValore());
     }
 
