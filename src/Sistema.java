@@ -5,7 +5,7 @@ public class Sistema {
     public Registro controlRW;
     Registro addressBUS;
     Registro dataBUS;
-    private Controller controller;
+    public Controller controller;
 
     public void setup(Controller controller) {
         this.controller = controller;
