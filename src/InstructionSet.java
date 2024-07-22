@@ -8,10 +8,31 @@ public class InstructionSet {
     public InstructionSet(CPU cpu) {
         this.cpu = cpu;
         this.istruzioni = new HashMap<Integer,Istruzione>();
-        int opCode = 24;
-        Istruzione istr= new Istruzione( 24 , "MOV A,B");
-        istruzioni.put(opCode,istr);
 
+        {   int opCode = 0;
+            istruzioni.put(opCode, (new Istruzione(opCode, "INC A") {
+                public void esegui(Sistema sistema) {
+                    CPU cpu = sistema.cpu;
+
+                    int operando = cpu.A.getValore() + 1;
+                    cpu.A.setValore(operando);
+
+                }
+
+            }));
+        }
+        {   int opCode = 1;
+            istruzioni.put(opCode, (new Istruzione(opCode, "INC B") {
+                public void esegui(Sistema sistema) {
+                    CPU cpu = sistema.cpu;
+
+                    int operando = cpu.B.getValore() + 1;
+                    cpu.B.setValore(operando);
+
+                }
+
+            }));
+        }
     }
 
     public String decodifica(int opCode){
