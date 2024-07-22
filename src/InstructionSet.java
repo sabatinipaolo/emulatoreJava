@@ -43,6 +43,41 @@ public class InstructionSet {
             }));
         }
 
+        // opcode 4
+        {   int opCode = 4;
+            istruzioni.put(opCode, (new Istruzione(opCode, "DEC A") {
+                public void esegui(Sistema sistema) {
+                    sistema.cpu.decRegistro( sistema.cpu.A);
+                }
+
+            }));
+        }
+        // opcode 5
+        {   int opCode = 5;
+            istruzioni.put(opCode, (new Istruzione(opCode, "DEC B") {
+                public void esegui(Sistema sistema) {
+                    sistema.cpu.decRegistro( sistema.cpu.B);
+                }
+
+            }));
+        }
+        // opcode 6
+        {   int opCode = 6;
+            istruzioni.put(opCode, (new Istruzione(opCode, "DEC C") {
+                public void esegui(Sistema sistema) {
+                    sistema.cpu.decRegistro( sistema.cpu.C);
+                }
+            }));
+        }
+        // opcode 7
+        {   int opCode = 7;
+            istruzioni.put(opCode, (new Istruzione(opCode, "DEC D") {
+                public void esegui(Sistema sistema) {
+                    sistema.cpu.decRegistro( sistema.cpu.D);
+                }
+            }));
+        }
+
 
     }
 
