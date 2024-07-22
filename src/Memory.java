@@ -6,8 +6,8 @@ public class Memory {
 
         mem = new Registro[16];
 
-        mem[0] = new Registro( 0, controller);
-        mem[1] = new Registro( 17, controller);
+        mem[0] = new Registro( 8, controller);
+        mem[1] = new Registro( 15, controller);
         mem[2] = new Registro( 18, controller);
         mem[3] = new Registro( 19, controller);
         mem[4] = new Registro( 0, controller);
@@ -21,7 +21,7 @@ public class Memory {
         mem[12] = new Registro( 0, controller);
         mem[13] = new Registro( 0, controller);
         mem[14] = new Registro( 0, controller);
-        mem[15] = new Registro( 0, controller);
+        mem[15] = new Registro( 33, controller);
 
     }
 
