@@ -121,6 +121,11 @@ public class CPU {
         int operando = registro.getValore() + 1;
         registro.setValore(operando);
     }
+    public void decRegistro(Registro registro){
+        int operando = registro.getValore() - 1;
+        registro.setValore(operando);
+    }
+
     public boolean isInDecodeOrExecute() {
 
         return stato.equals("DECODE") || stato.equals("EXECUTE");
