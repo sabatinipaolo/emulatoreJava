@@ -1,6 +1,6 @@
 public class CPU {
-    public String stato;
-    public int ciclo = 0;
+    private String stato;
+    private int ciclo = 0;
 
     public Registro A;
     public Registro B;
@@ -51,6 +51,7 @@ public class CPU {
 
     public void fetch() {
         stato = "FETCH";
+        ciclo=0;
         letturaDaMemoria(IP, IR);
 
     }
@@ -64,7 +65,7 @@ public class CPU {
         int ipvalore = IP.getValore() + 1;
         IP.setValore(ipvalore++);
 
-        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuHaFinitoCicloDiClock();
         controller.cpuAspettaUnCicloDiClock();
     }
 
@@ -75,33 +76,35 @@ public class CPU {
 
         instructionSet.esegui(opCode, controller.sistema );
 
-        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuHaFinitoCicloDiClock();
         controller.cpuAspettaUnCicloDiClock();
     }
 
     public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
-        ciclo = 0;
+        //ciclo = 0;
         int indirizzo = registroIndirizzo.getValore();
         MAR.setValore(indirizzo);
         RW.setToUno();
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
-        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuHaFinitoCicloDiClock();
         controller.cpuAspettaUnCicloDiClock();
 
-        ciclo = 1;
+        //ciclo = 1;
+        incCiclo();
         //aspetta che la ram renda disponibile il dato
         sistema.leggeDallaMemoria(indirizzo);
 
-        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuHaFinitoCicloDiClock();
         controller.cpuAspettaUnCicloDiClock();
 
-        ciclo = 2;
+        //ciclo = 2;
+        incCiclo();
 
         sistema.cpuHalettoDallaMemoria();
         move(MDR, registroDestinazione);
 
-        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuHaFinitoCicloDiClock();
         controller.cpuAspettaUnCicloDiClock();
     }
 
@@ -129,5 +132,8 @@ public class CPU {
     public boolean isInDecodeOrExecute() {
 
         return stato.equals("DECODE") || stato.equals("EXECUTE");
+    }
+
+    public void incCiclo() { ciclo ++;
     }
 }

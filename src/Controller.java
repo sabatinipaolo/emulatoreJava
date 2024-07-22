@@ -44,7 +44,7 @@ public class Controller {
 
     }
 
-    public void cpuHaFinitoCicloDiClock(String fase) {
+    public void cpuHaFinitoCicloDiClock() {
 
         vista.stampaTutto();
         vista.controller.svuota(utilizzati);
