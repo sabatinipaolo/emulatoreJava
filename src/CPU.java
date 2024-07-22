@@ -92,8 +92,6 @@ public class CPU {
 
         sistema.cpuHalettoDallaMemoria();
         move(MDR, registroDestinazione);
-        //int ipvalore = IP.getValore() + 1;
-        //IP.setValore(ipvalore++);
 
         controller.cpuHaFinitoCicloDiClock(stato);
         controller.cpuAspettaUnCicloDiClock();
