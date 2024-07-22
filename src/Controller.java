@@ -67,4 +67,12 @@ public class Controller {
 
     }
 
+    public String getStatoCpu(){
+        return sistema.getStatoCpu();
+    }
+
+    public String getDecodifica() {
+        return ( sistema.cpu.getDecodifica());
+
+    }
 }

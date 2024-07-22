@@ -45,4 +45,9 @@ public class Sistema {
 
     }
 
+
+    public String getStatoCpu(){
+        return cpu.getStato();
+    }
+
 }

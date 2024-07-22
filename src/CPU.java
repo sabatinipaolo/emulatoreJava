@@ -13,12 +13,14 @@ public class CPU {
     public PIN RW;
     private Sistema sistema;
     private Controller controller;
-    private InstructionSet is = new InstructionSet(this);
+    private InstructionSet instructionSet = new InstructionSet(this);
 
+    private String decodifica;
 
     public CPU(Controller controller) {
         this.controller = controller;
         this.sistema = controller.sistema;
+        this.decodifica ="";
 
         stato = "FETCH0";
         A = new Registro("A", 0, controller);
@@ -42,37 +44,50 @@ public class CPU {
             MAR.setValore(indirizzo);
             RW.setToUno();
 
-            stato = "FETCH1";
             sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
-            controller.cpuHaFinitoCicloDiClock("FETCH0");
-
+            controller.cpuHaFinitoCicloDiClock(stato);
+            stato = "FETCH1";
 
         } else if (stato.equals("FETCH1")) {
             //aspetta che la ram renda disponibile il dato
             sistema.leggeDallaMemoria();
-            stato = "FETCH2";
-            controller.cpuHaFinitoCicloDiClock("FETCH1");
 
+            controller.cpuHaFinitoCicloDiClock(stato);
+            stato = "FETCH2";
 
         } else if (stato.equals("FETCH2")) {
+
             sistema.cpuHalettoDallaMemoria();
             move(MDR, IR);
+
+            controller.cpuHaFinitoCicloDiClock(stato);
             stato = "DECODE0";
-            controller.cpuHaFinitoCicloDiClock("FETCH2");
 
         } else if (stato.equals("DECODE0")) {
+
+            decodifica = instructionSet.decodifica(IR.getValore());
+            controller.cpuHaFinitoCicloDiClock(stato);
+            stato = "EXECUTE0";
+
+        } else if (stato.equals("EXECUTE0")) {
+
             int ipvalore = IP.getValore() + 1;
-
             IP.setValore(ipvalore++);
-
+            controller.cpuHaFinitoCicloDiClock(stato);
             stato = "FETCH0";
-            controller.cpuHaFinitoCicloDiClock("DECODE0");
-
         }
-
     }
 
-    private void move(Registro sorg, Registro dest) {
+    public String getStato(){
+        return this.stato;
+    }
+
+    public String getDecodifica(){
+        return decodifica;
+    }
+     private void move(Registro sorg, Registro dest) {
         dest.setValore(sorg.getValore());
     }
+
+
 }

@@ -39,13 +39,17 @@ public class Vista {
         stampaTutto();
         Scanner scanner = new Scanner(System.in);
         String input;
-        do {
-            input = scanner.nextLine();
-            if (input.equals("")) {
+
+        System.out.println("premi invio PER AVVIARE ");
+        input = scanner.nextLine();
+
+        while (!input.equals("END")) {
+           if (input.equals("")) {
                 controller.notificaAlSistemaImpulsoDiClock();
             }
-
-        } while (!input.equals("END"));
+            System.out.println("premi invio");
+            input = scanner.nextLine();
+        } ;
 
         scanner.close();
     }
@@ -192,7 +196,12 @@ public class Vista {
         }
 
         System.out.println();
+        System.out.println("STATO CPU = "+controller.getStatoCpu());
         System.out.println();
+
+        if(controller.getStatoCpu().equals("DECODE0"))
+            System.out.println("istruzione ="+ controller.getDecodifica());
+        else System.out.println();
         System.out.println();
     }
 
@@ -210,27 +219,27 @@ class VistaRegistro {
         prefisso = " ";
         this.registro = registro;
         setValore(registro.getValore());
-        //aggiornaValoreAStampa();
+
     }
 
     public void setValore(int valore) {
         this.valore = valore;
-        //aggiornaValoreAStampa();
+
     }
 
     public void letto() {
         prefisso = "r";
-        //aggiornaValoreAStampa();
+
     }
 
     public void scritto() {
         prefisso = "w";
-        //aggiornaValoreAStampa();
+
     }
 
     public void setNonUtilizzato() {
         prefisso = " ";
-        //aggiornaValoreAStampa();
+
     }
 
     public void stampa() {
