@@ -1,5 +1,7 @@
 public class CPU {
-    public String stato = "FETCH0";
+    public String stato ;
+    public int ciclo = 0;
+
     public Registro A;
     public Registro B;
     public Registro C;
@@ -20,9 +22,9 @@ public class CPU {
     public CPU(Controller controller) {
         this.controller = controller;
         this.sistema = controller.sistema;
-        this.decodifica ="";
+        this.decodifica = "";
 
-        stato = "FETCH0";
+        stato = "power OFF";
         A = new Registro(0, controller);
         B = new Registro(0, controller);
         C = new Registro(0, controller);
@@ -37,49 +39,67 @@ public class CPU {
         RW = new Registro(-1, controller);
     }
 
-    public void impulsoDiClock() {
+    public void avvia() {
 
-        if (stato.equals("FETCH0")) {
-            int indirizzo = IP.getValore();
-            MAR.setValore(indirizzo);
-            RW.setToUno();
-
-            sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
-            controller.cpuHaFinitoCicloDiClock(stato);
-            stato = "FETCH1";
-
-        } else if (stato.equals("FETCH1")) {
-            //aspetta che la ram renda disponibile il dato
-            sistema.leggeDallaMemoria();
-
-            controller.cpuHaFinitoCicloDiClock(stato);
-            stato = "FETCH2";
-
-        } else if (stato.equals("FETCH2")) {
-
-            sistema.cpuHalettoDallaMemoria();
-            move(MDR, IR);
-            int ipvalore = IP.getValore() + 1;
-            IP.setValore(ipvalore++);
-            controller.cpuHaFinitoCicloDiClock(stato);
-            stato = "DECODE0";
-
-        } else if (stato.equals("DECODE0")) {
-
-            decodifica = instructionSet.decodifica(IR.getValore());
-            controller.cpuHaFinitoCicloDiClock(stato);
-            stato = "EXECUTE0";
-
-        } else if (stato.equals("EXECUTE0")) {
-
-
-            controller.cpuHaFinitoCicloDiClock(stato);
-            stato = "FETCH0";
+        while (true) {
+            fetch();
+            decode();
+            execute();
         }
     }
 
-    public String getStato(){
-        return this.stato;
+    public void fetch() {
+        stato = "FETCH";
+        ciclo = 0;
+
+        int indirizzo = IP.getValore();
+        MAR.setValore(indirizzo);
+        RW.setToUno();
+
+        sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
+
+        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuAspettaUnCicloDiClock();
+
+        ciclo = 1;
+        //aspetta che la ram renda disponibile il dato
+        sistema.leggeDallaMemoria();
+
+        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuAspettaUnCicloDiClock();
+
+        ciclo = 2;
+
+        sistema.cpuHalettoDallaMemoria();
+        move(MDR, IR);
+        int ipvalore = IP.getValore() + 1;
+        IP.setValore(ipvalore++);
+
+        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuAspettaUnCicloDiClock();
+    }
+
+    public void decode() {
+        stato = "DECODE";
+        ciclo = 0;
+
+        decodifica = instructionSet.decodifica(IR.getValore());
+
+        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuAspettaUnCicloDiClock();
+    }
+
+    public void execute() {
+
+        stato = "EXECUTE";
+        ciclo = 0;
+
+        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuAspettaUnCicloDiClock();
+    }
+
+    public String getStatoECiclo() {
+        return stato +"-"+ ciclo;
     }
 
     public String getDecodifica(){
@@ -90,4 +110,8 @@ public class CPU {
     }
 
 
+    public boolean isInDecodeOrExecute() {
+
+        return stato.equals("DECODE") || stato.equals("EXECUTE");
+    }
 }

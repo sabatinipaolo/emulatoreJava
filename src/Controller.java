@@ -27,10 +27,6 @@ public class Controller {
         this.vista = v;
     }
 
-    public void notificaAlSistemaImpulsoDiClock() {
-        sistema.impulsoDiClok();
-    }
-
     public void registroHaCambiatoValoreIn(Registro registro, int valore) {
         VistaRegistro v = vista.get(registro);
         v.setValore(valore);
@@ -74,5 +70,14 @@ public class Controller {
     public String getDecodifica() {
         return ( sistema.cpu.getDecodifica());
 
+    }
+
+    public void cpuAspettaUnCicloDiClock() {
+        vista.aspettaComando( "", "inserisci un comando o invio per un ciclo di clock :" );
+    }
+
+    public void avviaSistema() {
+
+        sistema.cpu.avvia();
     }
 }

@@ -16,11 +16,6 @@ public class Sistema {
         this.RW = new Registro( -1, controller);
     }
 
-    public void impulsoDiClok() {
-
-        cpu.impulsoDiClock();
-
-    }
 
     public void cpuVuoleLeggereDallaMemoria(int indirizzo) {
         RW.setToUno();
@@ -47,7 +42,11 @@ public class Sistema {
 
 
     public String getStatoCpu(){
-        return cpu.getStato();
+        return cpu.getStatoECiclo();
     }
 
+    public boolean isInDecodeOrExecute() {
+
+        return (cpu.isInDecodeOrExecute());
+    }
 }

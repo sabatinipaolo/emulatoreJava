@@ -37,21 +37,26 @@ public class Vista {
 
     public void inizia() {
         stampaTutto();
+        aspettaComando("" , "inserisci un comando o invio per AVVIARE :");
+        controller.avviaSistema();
+    }
+    public void aspettaComando( String comando ,String messaggio ){
         Scanner scanner = new Scanner(System.in);
         String input;
 
-        System.out.println("premi invio PER AVVIARE ");
+        System.out.print(messaggio);
         input = scanner.nextLine();
 
-        while (!input.equals("END")) {
-           if (input.equals("")) {
-                controller.notificaAlSistemaImpulsoDiClock();
+        while (!(input.equals("END")  ) ){
+            if (input.equals(comando)) {
+                return;
             }
-            System.out.println("premi invio");
+            System.out.print(messaggio);
             input = scanner.nextLine();
         } ;
 
         scanner.close();
+        System.exit(0);
     }
 
     public VistaRegistro get(Registro r) {
@@ -199,7 +204,7 @@ public class Vista {
         System.out.println("STATO CPU = "+controller.getStatoCpu());
         System.out.println();
 
-        if(controller.getStatoCpu().equals("DECODE0"))
+        if(controller.sistema.isInDecodeOrExecute() )
             System.out.println("istruzione ="+ controller.getDecodifica());
         else System.out.println();
         System.out.println();
