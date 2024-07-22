@@ -12,11 +12,7 @@ public class InstructionSet {
         {   int opCode = 0;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC A") {
                 public void esegui(Sistema sistema) {
-                    CPU cpu = sistema.cpu;
-
-                    int operando = cpu.A.getValore() + 1;
-                    cpu.A.setValore(operando);
-
+                    sistema.cpu.incRegistro( sistema.cpu.A);
                 }
 
             }));
@@ -25,11 +21,7 @@ public class InstructionSet {
         {   int opCode = 1;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC B") {
                 public void esegui(Sistema sistema) {
-                    CPU cpu = sistema.cpu;
-
-                    int operando = cpu.B.getValore() + 1;
-                    cpu.B.setValore(operando);
-
+                    sistema.cpu.incRegistro( sistema.cpu.B);
                 }
 
             }));
@@ -38,10 +30,7 @@ public class InstructionSet {
         {   int opCode = 2;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC C") {
                 public void esegui(Sistema sistema) {
-                    CPU cpu = sistema.cpu;
-
-                    int operando = cpu.C.getValore() + 1;
-                    cpu.C.setValore(operando);
+                    sistema.cpu.incRegistro( sistema.cpu.C);
                 }
             }));
         }
@@ -49,10 +38,7 @@ public class InstructionSet {
         {   int opCode = 3;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC D") {
                 public void esegui(Sistema sistema) {
-                    CPU cpu = sistema.cpu;
-
-                    int operando = cpu.D.getValore() + 1;
-                    cpu.D.setValore(operando);
+                    sistema.cpu.incRegistro( sistema.cpu.D);
                 }
             }));
         }
