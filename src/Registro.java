@@ -23,4 +23,12 @@ public class Registro {
     public String getNome() {
         return nome;
     }
+
+    public void setToUno() {
+        setValore(1);
+    }
+
+    public void setToUndefined() {
+        setValore(-1);
+    }
 }

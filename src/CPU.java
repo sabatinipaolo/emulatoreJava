@@ -10,7 +10,7 @@ public class CPU {
     public Registro FLAG;
     public Registro MDR;
     public Registro MAR;
-    public PIN RW;
+    public Registro RW;
     private Sistema sistema;
     private Controller controller;
     private InstructionSet instructionSet = new InstructionSet(this);
@@ -34,7 +34,7 @@ public class CPU {
         FLAG = new Registro("FLAG", 0, controller);
         MDR = new Registro("MDR", -1, controller);
         MAR = new Registro("MAR", -1, controller);
-        RW = new PIN("RW", -1, controller);
+        RW = new Registro("RW", -1, controller);
     }
 
     public void impulsoDiClock() {

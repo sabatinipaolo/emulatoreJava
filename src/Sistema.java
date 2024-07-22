@@ -2,7 +2,7 @@ public class Sistema {
 
     public CPU cpu;
     public Memory RAM;
-    public PIN RW;
+    public Registro RW;
     BUS addressBUS;
     BUS dataBUS;
     private Controller controller;
@@ -13,7 +13,7 @@ public class Sistema {
         this.RAM = new Memory(controller);
         this.addressBUS = new BUS("address Bus", -1, controller);
         this.dataBUS = new BUS("data Bus", -1, controller);
-        this.RW = new PIN("RW cntl Bus", -1, controller);
+        this.RW = new Registro("RW cntl Bus", -1, controller);
     }
 
     public void impulsoDiClok() {
