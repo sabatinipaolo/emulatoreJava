@@ -39,7 +39,7 @@ public class Sistema {
     public void cpuHalettoDallaMemoria() {
 
         addressBUS.setUndefined();
-
+        dataBUS.setUndefined();
         RW.setToUndefined();
 
 
