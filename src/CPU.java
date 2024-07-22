@@ -50,16 +50,36 @@ public class CPU {
 
     public void fetch() {
         stato = "FETCH";
+        letturaDaMemoria( IP , IR);
+
+    }
+
+    public void decode() {
+        stato = "DECODE";
         ciclo = 0;
 
-        int indirizzo = IP.getValore();
-        MAR.setValore(indirizzo);
-        RW.setToUno();
+        decodifica = instructionSet.decodifica(IR.getValore());
 
-        sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
+        int ipvalore = IP.getValore() + 1;
+        IP.setValore(ipvalore++);
+        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuAspettaUnCicloDiClock();
+    }
+
+    public void execute() {
+
+        stato = "EXECUTE";
+        ciclo = 0;
 
         controller.cpuHaFinitoCicloDiClock(stato);
         controller.cpuAspettaUnCicloDiClock();
+    }
+    public void letturaDaMemoria( Registro registroIndirizzo,Registro registroDestinazione){
+        ciclo = 0;
+        int indirizzo = registroIndirizzo.getValore();
+        MAR.setValore(indirizzo);
+        RW.setToUno();
+        sistema.cpuVuoleLeggereDallaMemoria( indirizzo );
 
         ciclo = 1;
         //aspetta che la ram renda disponibile il dato
@@ -71,28 +91,9 @@ public class CPU {
         ciclo = 2;
 
         sistema.cpuHalettoDallaMemoria();
-        move(MDR, IR);
-        int ipvalore = IP.getValore() + 1;
-        IP.setValore(ipvalore++);
-
-        controller.cpuHaFinitoCicloDiClock(stato);
-        controller.cpuAspettaUnCicloDiClock();
-    }
-
-    public void decode() {
-        stato = "DECODE";
-        ciclo = 0;
-
-        decodifica = instructionSet.decodifica(IR.getValore());
-
-        controller.cpuHaFinitoCicloDiClock(stato);
-        controller.cpuAspettaUnCicloDiClock();
-    }
-
-    public void execute() {
-
-        stato = "EXECUTE";
-        ciclo = 0;
+        move(MDR, registroDestinazione);
+        //int ipvalore = IP.getValore() + 1;
+        //IP.setValore(ipvalore++);
 
         controller.cpuHaFinitoCicloDiClock(stato);
         controller.cpuAspettaUnCicloDiClock();
