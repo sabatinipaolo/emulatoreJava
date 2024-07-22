@@ -15,21 +15,21 @@ public class Vista {
         this.controller = controller;
 
         viste = new HashMap<Registro, VistaRegistro>();
-        viste.put(controller.sistema.cpu.MAR, new VistaRegistro(controller.sistema.cpu.MAR));
-        viste.put(controller.sistema.cpu.MDR, new VistaRegistro(controller.sistema.cpu.MDR));
-        viste.put(controller.sistema.cpu.IP, new VistaRegistro(controller.sistema.cpu.IP));
-        viste.put(controller.sistema.cpu.IR, new VistaRegistro(controller.sistema.cpu.IR));
-        viste.put(controller.sistema.cpu.A, new VistaRegistro(controller.sistema.cpu.A));
-        viste.put(controller.sistema.cpu.B, new VistaRegistro(controller.sistema.cpu.B));
-        viste.put(controller.sistema.cpu.C, new VistaRegistro(controller.sistema.cpu.C));
-        viste.put(controller.sistema.cpu.D, new VistaRegistro(controller.sistema.cpu.D));
-        viste.put(controller.sistema.cpu.RW, new VistaRegistro(controller.sistema.cpu.RW));
-        viste.put(controller.sistema.addressBUS, new VistaRegistro(controller.sistema.addressBUS));
-        viste.put(controller.sistema.dataBUS, new VistaRegistro(controller.sistema.dataBUS));
-        viste.put(controller.sistema.RW, new VistaRegistro(controller.sistema.RW));
+        viste.put(controller.sistema.cpu.MAR, new VistaRegistro("MAR", controller.sistema.cpu.MAR));
+        viste.put(controller.sistema.cpu.MDR, new VistaRegistro("MDR",controller.sistema.cpu.MDR));
+        viste.put(controller.sistema.cpu.IP, new VistaRegistro("IP",controller.sistema.cpu.IP));
+        viste.put(controller.sistema.cpu.IR, new VistaRegistro("IR",controller.sistema.cpu.IR));
+        viste.put(controller.sistema.cpu.A, new VistaRegistro("A",controller.sistema.cpu.A));
+        viste.put(controller.sistema.cpu.B, new VistaRegistro("B",controller.sistema.cpu.B));
+        viste.put(controller.sistema.cpu.C, new VistaRegistro("C",controller.sistema.cpu.C));
+        viste.put(controller.sistema.cpu.D, new VistaRegistro("D",controller.sistema.cpu.D));
+        viste.put(controller.sistema.cpu.RW, new VistaRegistro("RW",controller.sistema.cpu.RW));
+        viste.put(controller.sistema.addressBUS, new VistaRegistro("address Bus",controller.sistema.addressBUS));
+        viste.put(controller.sistema.dataBUS, new VistaRegistro("data Bus",controller.sistema.dataBUS));
+        viste.put(controller.sistema.RW, new VistaRegistro("RW cntl Bus",controller.sistema.RW));
 
         for (int i = 0; i < 16; i++) {
-            viste.put(controller.sistema.RAM.mem[i], new VistaRegistro(controller.sistema.RAM.mem[i]));
+            viste.put(controller.sistema.RAM.mem[i], new VistaRegistro("["+i+"]",controller.sistema.RAM.mem[i]));
         }
         ;
 
@@ -187,9 +187,9 @@ public class Vista {
         {
             for (int i = 0; i < 16; i++) {
                 VistaRegistro vr = viste.get(controller.sistema.RAM.mem[i]);
-                System.out.print("    ");
-                vr.stampaNome();
-                System.out.print(" ");
+                System.out.print("  ");
+                System.out.print( String.format("%1$3s",i));
+                System.out.print("   ");
 
             }
             ;
@@ -214,9 +214,11 @@ class VistaRegistro {
     private String valoreAStampa;
     private String prefisso;
     private Registro registro;
+    private String nome;
 
-    public VistaRegistro(Registro registro) {
+    public VistaRegistro(String nome , Registro registro) {
         prefisso = " ";
+        this.nome = nome;
         this.registro = registro;
         setValore(registro.getValore());
 
@@ -246,10 +248,10 @@ class VistaRegistro {
         String valoreAStampa;
         if (valore == -1) {
             prefisso = " ";
-            valoreAStampa = prefisso + " " + registro.getNome() + "=" + String.format("%1$5s", "");
+            valoreAStampa = prefisso + " " + nome + "=" + String.format("%1$5s", "");
             ;
         } else {
-            valoreAStampa = prefisso + " " + registro.getNome() + "=" + String.format("%1$5s", String.valueOf(valore));
+            valoreAStampa = prefisso + " " + nome + "=" + String.format("%1$5s", String.valueOf(valore));
         }
 
         valoreAStampa = String.format("%1$9s", valoreAStampa);
@@ -258,7 +260,7 @@ class VistaRegistro {
 
     public void stampaNome() {
 
-        System.out.print(String.format("%1$3s", registro.getNome()));
+        System.out.print(String.format("%1$3s", nome));
     }
 
     public void stampaValore() {

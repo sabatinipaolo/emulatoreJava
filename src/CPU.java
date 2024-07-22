@@ -23,18 +23,18 @@ public class CPU {
         this.decodifica ="";
 
         stato = "FETCH0";
-        A = new Registro("A", 0, controller);
-        B = new Registro("B", 0, controller);
-        C = new Registro("C", 0, controller);
-        D = new Registro("D", 0, controller);
-        IP = new Registro("IP", 0, controller);
-        IR = new Registro("IR", 0, controller);
-        SP = new Registro("SP", 255, controller);
+        A = new Registro(0, controller);
+        B = new Registro(0, controller);
+        C = new Registro(0, controller);
+        D = new Registro(0, controller);
+        IP = new Registro(0, controller);
+        IR = new Registro(0, controller);
+        SP = new Registro(255, controller);
 
-        FLAG = new Registro("FLAG", 0, controller);
-        MDR = new Registro("MDR", -1, controller);
-        MAR = new Registro("MAR", -1, controller);
-        RW = new Registro("RW", -1, controller);
+        FLAG = new Registro(0, controller);
+        MDR = new Registro(-1, controller);
+        MAR = new Registro(-1, controller);
+        RW = new Registro(-1, controller);
     }
 
     public void impulsoDiClock() {

@@ -1,10 +1,8 @@
 public class Registro {
     private int valore;
-    private String nome;
     private Controller controller;
 
-    public Registro(String nome, int valore, Controller controller) {
-        this.nome = nome;
+    public Registro( int valore, Controller controller) {
         this.valore = valore;
         this.controller = controller;
     }
@@ -18,10 +16,6 @@ public class Registro {
 
         this.valore = valore;
         controller.registroHaCambiatoValoreIn(this, valore);
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public void setToUno() {

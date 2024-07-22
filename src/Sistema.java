@@ -11,9 +11,9 @@ public class Sistema {
         this.controller = controller;
         this.cpu = new CPU(controller);
         this.RAM = new Memory(controller);
-        this.addressBUS = new Registro("address Bus", -1, controller);
-        this.dataBUS = new Registro("data Bus", -1, controller);
-        this.RW = new Registro("RW cntl Bus", -1, controller);
+        this.addressBUS = new Registro( -1, controller);
+        this.dataBUS = new Registro( -1, controller);
+        this.RW = new Registro( -1, controller);
     }
 
     public void impulsoDiClok() {
