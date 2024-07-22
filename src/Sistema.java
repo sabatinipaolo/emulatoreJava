@@ -3,16 +3,16 @@ public class Sistema {
     public CPU cpu;
     public Memory RAM;
     public Registro RW;
-    BUS addressBUS;
-    BUS dataBUS;
+    Registro addressBUS;
+    Registro dataBUS;
     private Controller controller;
 
     public void setup(Controller controller) {
         this.controller = controller;
         this.cpu = new CPU(controller);
         this.RAM = new Memory(controller);
-        this.addressBUS = new BUS("address Bus", -1, controller);
-        this.dataBUS = new BUS("data Bus", -1, controller);
+        this.addressBUS = new Registro("address Bus", -1, controller);
+        this.dataBUS = new Registro("data Bus", -1, controller);
         this.RW = new Registro("RW cntl Bus", -1, controller);
     }
 
@@ -38,8 +38,8 @@ public class Sistema {
 
     public void cpuHalettoDallaMemoria() {
 
-        addressBUS.setUndefined();
-        dataBUS.setUndefined();
+        addressBUS.setToUndefined();
+        dataBUS.setToUndefined();
         RW.setToUndefined();
 
 
