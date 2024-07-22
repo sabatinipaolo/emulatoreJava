@@ -59,7 +59,8 @@ public class CPU {
 
             sistema.cpuHalettoDallaMemoria();
             move(MDR, IR);
-
+            int ipvalore = IP.getValore() + 1;
+            IP.setValore(ipvalore++);
             controller.cpuHaFinitoCicloDiClock(stato);
             stato = "DECODE0";
 
@@ -71,8 +72,7 @@ public class CPU {
 
         } else if (stato.equals("EXECUTE0")) {
 
-            int ipvalore = IP.getValore() + 1;
-            IP.setValore(ipvalore++);
+
             controller.cpuHaFinitoCicloDiClock(stato);
             stato = "FETCH0";
         }
