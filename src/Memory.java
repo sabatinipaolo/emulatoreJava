@@ -7,9 +7,9 @@ public class Memory {
         mem = new Registro[16];
 
         mem[0] = new Registro( 0, controller);
-        mem[1] = new Registro( 1, controller);
-        mem[2] = new Registro( 2, controller);
-        mem[3] = new Registro( 3, controller);
+        mem[1] = new Registro( 17, controller);
+        mem[2] = new Registro( 18, controller);
+        mem[3] = new Registro( 19, controller);
         mem[4] = new Registro( 0, controller);
         mem[5] = new Registro( 1, controller);
         mem[6] = new Registro( 2, controller);

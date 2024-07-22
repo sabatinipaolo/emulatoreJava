@@ -113,7 +113,7 @@ public class CPU {
         return decodifica;
     }
 
-    private void move(Registro sorg, Registro dest) {
+    public void move(Registro sorg, Registro dest) {
         dest.setValore(sorg.getValore());
     }
 

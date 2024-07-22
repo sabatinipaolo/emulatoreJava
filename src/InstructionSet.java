@@ -78,6 +78,31 @@ public class InstructionSet {
             }));
         }
 
+        // opcode 17
+        {   int opCode = 17;
+            istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, B") {
+                public void esegui(Sistema sistema) {
+                    sistema.cpu.move(sistema.cpu.A , sistema.cpu.B);
+                }
+            }));
+        }
+        // opcode 18
+        {   int opCode = 18;
+            istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, C") {
+                public void esegui(Sistema sistema) {
+                    sistema.cpu.move(sistema.cpu.A , sistema.cpu.C);
+                }
+            }));
+        }
+        // opcode 19
+        {   int opCode = 19;
+            istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, D") {
+                public void esegui(Sistema sistema) {
+                    sistema.cpu.move(sistema.cpu.A , sistema.cpu.D);
+                }
+            }));
+        }
+
 
     }
 
