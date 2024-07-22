@@ -15,6 +15,10 @@ public class InstructionSet {
     }
 
     public String decodifica(int opCode){
-        return  istruzioni.get(opCode).getDecodifica();
+
+        Istruzione istruzione = istruzioni.get(opCode);
+        if (istruzione==null) return " NOP !!!" ;
+        return istruzione.getDecodifica();
+
     }
 }

@@ -18,6 +18,7 @@ public class CPU {
     private InstructionSet instructionSet = new InstructionSet(this);
 
     private String decodifica;
+    private int opCode;
 
     public CPU(Controller controller) {
         this.controller = controller;
@@ -57,8 +58,8 @@ public class CPU {
     public void decode() {
         stato = "DECODE";
         ciclo = 0;
-
-        decodifica = instructionSet.decodifica(IR.getValore());
+        opCode = IR.getValore();
+        decodifica = instructionSet.decodifica(opCode);
 
         int ipvalore = IP.getValore() + 1;
         IP.setValore(ipvalore++);
