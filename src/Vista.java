@@ -26,7 +26,7 @@ public class Vista {
         viste.put(controller.sistema.cpu.RW, new VistaRegistro("RW",controller.sistema.cpu.RW));
         viste.put(controller.sistema.addressBUS, new VistaRegistro("address Bus",controller.sistema.addressBUS));
         viste.put(controller.sistema.dataBUS, new VistaRegistro("data Bus",controller.sistema.dataBUS));
-        viste.put(controller.sistema.RW, new VistaRegistro("RW cntl Bus",controller.sistema.RW));
+        viste.put(controller.sistema.controlRW, new VistaRegistro("RW cntl Bus",controller.sistema.controlRW));
 
         for (int i = 0; i < 16; i++) {
             viste.put(controller.sistema.RAM.mem[i], new VistaRegistro("["+i+"]",controller.sistema.RAM.mem[i]));
@@ -89,7 +89,7 @@ public class Vista {
 
         vAddressBus = viste.get(controller.sistema.addressBUS);
         vDataBus = viste.get(controller.sistema.dataBUS);
-        vSisRW = viste.get(controller.sistema.RW);
+        vSisRW = viste.get(controller.sistema.controlRW);
 
         //riga
         {

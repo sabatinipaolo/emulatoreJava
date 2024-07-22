@@ -86,9 +86,12 @@ public class CPU {
         RW.setToUno();
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
+        controller.cpuHaFinitoCicloDiClock(stato);
+        controller.cpuAspettaUnCicloDiClock();
+
         ciclo = 1;
         //aspetta che la ram renda disponibile il dato
-        sistema.leggeDallaMemoria();
+        sistema.leggeDallaMemoria(indirizzo);
 
         controller.cpuHaFinitoCicloDiClock(stato);
         controller.cpuAspettaUnCicloDiClock();

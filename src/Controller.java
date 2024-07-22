@@ -48,7 +48,7 @@ public class Controller {
 
         vista.stampaTutto();
         vista.controller.svuota(utilizzati);
-        System.out.println("Controller. finita Cilco di clock " + fase);
+        System.out.println("Controller. finita Cilco di clock " + sistema.cpu.getStatoECiclo());
     }
 
 

@@ -2,7 +2,7 @@ public class Sistema {
 
     public CPU cpu;
     public Memory RAM;
-    public Registro RW;
+    public Registro controlRW;
     Registro addressBUS;
     Registro dataBUS;
     private Controller controller;
@@ -13,18 +13,19 @@ public class Sistema {
         this.RAM = new Memory(controller);
         this.addressBUS = new Registro( -1, controller);
         this.dataBUS = new Registro( -1, controller);
-        this.RW = new Registro( -1, controller);
+        this.controlRW = new Registro( -1, controller);
     }
 
 
     public void cpuVuoleLeggereDallaMemoria(int indirizzo) {
-        RW.setToUno();
+        controlRW.setToUno();
         addressBUS.setValore(indirizzo);
     }
 
 
-    public void leggeDallaMemoria() {
-        int indirizzo = addressBUS.getValore();
+    public void leggeDallaMemoria(int indirizzo) {
+        addressBUS.setToUndefined();
+        controlRW.setToUndefined();
         int dato = RAM.getValore(indirizzo);
         dataBUS.setValore(dato);
         cpu.MDR.setValore(dato);
@@ -33,11 +34,9 @@ public class Sistema {
 
     public void cpuHalettoDallaMemoria() {
 
-        addressBUS.setToUndefined();
+       // addressBUS.setToUndefined();
+       // controlRW.setToUndefined();
         dataBUS.setToUndefined();
-        RW.setToUndefined();
-
-
     }
 
 
