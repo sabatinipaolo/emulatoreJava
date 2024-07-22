@@ -2,48 +2,36 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Vista {
-    private HashMap<Registro, VistaRegistro> viste;
     Controller controller;
+    private HashMap<Registro, VistaRegistro> viste;
     private boolean enable;
-    private VistaRegistro vA,vB,vC,vD,vIP,vIR,vSP,vFLAG,vMDR,vMAR,vRW;
-    private VistaRegistro vAddressBus, vDataBus,  vSisRW;
 
-    public Vista (){
-        enable=false;
+
+    public Vista() {
+        enable = false;
     }
+
     public void setup(Controller controller) {
         this.controller = controller;
 
         viste = new HashMap<Registro, VistaRegistro>();
-
         viste.put(controller.sistema.cpu.MAR, new VistaRegistro(controller.sistema.cpu.MAR));
-        vMAR = viste.get(controller.sistema.cpu.MAR);
-
         viste.put(controller.sistema.cpu.MDR, new VistaRegistro(controller.sistema.cpu.MDR));
-        vMDR = viste.get(controller.sistema.cpu.MDR);
-
         viste.put(controller.sistema.cpu.IP, new VistaRegistro(controller.sistema.cpu.IP));
-        vIP  = viste.get(controller.sistema.cpu.IP);
-
         viste.put(controller.sistema.cpu.IR, new VistaRegistro(controller.sistema.cpu.IR));
-        vIR  = viste.get(controller.sistema.cpu.IR);
-
+        viste.put(controller.sistema.cpu.A, new VistaRegistro(controller.sistema.cpu.A));
+        viste.put(controller.sistema.cpu.B, new VistaRegistro(controller.sistema.cpu.B));
+        viste.put(controller.sistema.cpu.C, new VistaRegistro(controller.sistema.cpu.C));
+        viste.put(controller.sistema.cpu.D, new VistaRegistro(controller.sistema.cpu.D));
         viste.put(controller.sistema.cpu.RW, new VistaRegistro(controller.sistema.cpu.RW));
-        vRW  = viste.get(controller.sistema.cpu.RW);
-
-
         viste.put(controller.sistema.addressBUS, new VistaRegistro(controller.sistema.addressBUS));
-        vAddressBus=viste.get(controller.sistema.addressBUS);
-
         viste.put(controller.sistema.dataBUS, new VistaRegistro(controller.sistema.dataBUS));
-        vDataBus=viste.get(controller.sistema.dataBUS);
-
         viste.put(controller.sistema.RW, new VistaRegistro(controller.sistema.RW));
-        vSisRW =viste.get(controller.sistema.RW);
 
-        for (int i =0 ; i < 16 ; i++){
+        for (int i = 0; i < 16; i++) {
             viste.put(controller.sistema.RAM.mem[i], new VistaRegistro(controller.sistema.RAM.mem[i]));
-        };
+        }
+        ;
 
     }
 
@@ -66,57 +54,151 @@ public class Vista {
         return (viste.get(r));
     }
 
-    public void enable(){
-        enable=true;
+    public void enable() {
+        enable = true;
     }
+
     public boolean isNotEnabled() {
-        return ( ! enable );
+        return (!enable);
     }
 
     public void stampaTutto() {
 
+        VistaRegistro vA, vB, vC, vD, vIP, vIR, vSP, vFLAG, vMDR, vMAR, vRW;
+        VistaRegistro vAddressBus, vDataBus, vSisRW;
 
+        vA = viste.get(controller.sistema.cpu.A);
+        vB = viste.get(controller.sistema.cpu.B);
+        vC = viste.get(controller.sistema.cpu.C);
+        vD = viste.get(controller.sistema.cpu.D);
 
-        //System.out.println();
-        //System.out.println("-------------------------------");
-        vIP.stampa();
-        System.out.println();
-        //System.out.print( "              " );
-        vIR.stampa();
-        System.out.println();
+        vMAR = viste.get(controller.sistema.cpu.MAR);
+        vMDR = viste.get(controller.sistema.cpu.MDR);
+        vIP = viste.get(controller.sistema.cpu.IP);
+        vIR = viste.get(controller.sistema.cpu.IR);
+        vRW = viste.get(controller.sistema.cpu.RW);
 
-//        System.out.print("\n----");
+        vAddressBus = viste.get(controller.sistema.addressBUS);
+        vDataBus = viste.get(controller.sistema.dataBUS);
+        vSisRW = viste.get(controller.sistema.RW);
 
-        vMAR.stampa();
-        System.out.println();
-//        System.out.print( " --------" );
-        vMDR.stampa();
-        System.out.println();
-//        System.out.println("\n\n\n");
-
-        vRW.stampa();
-        System.out.println();
-        System.out.println( " --------" );
-
-        vAddressBus.stampa();
-        System.out.println();
-
-        vSisRW.stampa();
-        System.out.println();
-
-        vDataBus.stampa();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-
-        for (int i =0 ; i < 16 ; i++){
-            VistaRegistro vr = viste.get(controller.sistema.RAM.mem[i]);
-            vr.stampa();
-            System.out.print(" | ");
+        //riga
+        {
+            System.out.println("------------------------------------------------------------------------------------");
         }
+        //riga vuota cpu
+        {
+            System.out.print("|                                                                                  |\n");
+        }
+        //riga
+        {
+            System.out.print("|  ");
+            vA.stampa();
+            System.out.print("     ");
+            vB.stampa();
+            System.out.print("     ");
+            vC.stampa();
+            System.out.print("     ");
+            vD.stampa();
+            System.out.println("                             |");
+        }
+        //riga vuota cpu
+        {
+            System.out.print("|                                                                                  |\n");
+        }
+        //riga  IP   IR
+        {
+            System.out.print("|  ");
+            vIP.stampa();
+            System.out.print("                                ");
+            vIR.stampa();
+            System.out.println("                            |");
+        }
+        //riga vuota cpu
+        {
+            System.out.print("|                                                                                  |\n");
+        }
+        //riga  MAR RW MDR
+        {
+            System.out.print("--------");
+            vMAR.stampa();
+            System.out.print("  --------------");
+            vRW.stampa();
+            System.out.print(" -------------");
+            vMDR.stampa();
+            System.out.println(" -------------");
+        }
+        //riga
+        {
+            System.out.println("             |      |                       |                   /      \\");
+            System.out.println("             |      |                       |                  /_      _\\");
+            System.out.println("             |      |                       |                   |      | ");
+
+        }
+        //riga
+        {
+            vAddressBus.stampa();
+            System.out.print(" |     ");
+
+            vSisRW.stampa();
+            System.out.print("         ");
+
+            vDataBus.stampa();
+            System.out.println(" |");
+        }
+        //riga
+        {
+            System.out.println("            _|      |_                      |                  _|      |_");
+            System.out.println("            \\        /                      |                  \\        /");
+            System.out.println("             \\      /                       |                   \\      /");
+
+        }
+        //riga
+        {
+            for (int i = 0; i < 16; i++) {
+                System.out.print("|-------");
+            }
+            System.out.println("|");
+        }
+        //riga
+        {
+            for (int i = 0; i < 16; i++) {
+                VistaRegistro vr = viste.get(controller.sistema.RAM.mem[i]);
+                System.out.print("| ");
+                vr.stampaValore();
+                System.out.print(" ");
+            }
+            System.out.println("|");
+        }
+
+        //riga
+        {
+            for (int i = 0; i < 16; i++) {
+                System.out.print("|-------");
+            }
+            System.out.println("|");
+        }
+
+        //riga
+        {
+            for (int i = 0; i < 16; i++) {
+                VistaRegistro vr = viste.get(controller.sistema.RAM.mem[i]);
+                System.out.print("    ");
+                vr.stampaNome();
+                System.out.print(" ");
+
+            }
+            ;
+        }
+
+        System.out.println();
+        System.out.println();
         System.out.println();
     }
+
+
 }
+
 
 class VistaRegistro {
     private int valore;
@@ -127,42 +209,50 @@ class VistaRegistro {
     public VistaRegistro(Registro registro) {
         prefisso = " ";
         this.registro = registro;
-
         setValore(registro.getValore());
-        aggiornaValoreAStampa();
-
+        //aggiornaValoreAStampa();
     }
 
-    public void letto( ){
-        prefisso="r";
-        aggiornaValoreAStampa();
-    }
-
-    public void scritto( ){
-        prefisso="w";
-        aggiornaValoreAStampa();
-    }
-    private void aggiornaValoreAStampa() {
-
-        if (valore == -1 ){
-            prefisso = " ";
-            valoreAStampa = prefisso + " "+ registro.getNome() ;
-        } else {
-            valoreAStampa = prefisso + " " + registro.getNome() + "=" + String.valueOf(valore);
-        }
-    }
     public void setValore(int valore) {
-            this.valore=valore;
-            aggiornaValoreAStampa();
+        this.valore = valore;
+        //aggiornaValoreAStampa();
     }
-    public void setNonUtilizzato(){
+
+    public void letto() {
+        prefisso = "r";
+        //aggiornaValoreAStampa();
+    }
+
+    public void scritto() {
+        prefisso = "w";
+        //aggiornaValoreAStampa();
+    }
+
+    public void setNonUtilizzato() {
         prefisso = " ";
-        aggiornaValoreAStampa();
+        //aggiornaValoreAStampa();
     }
+
     public void stampa() {
+        String valoreAStampa;
+        if (valore == -1) {
+            prefisso = " ";
+            valoreAStampa = prefisso + " " + registro.getNome() + "=" + String.format("%1$5s", "");
+            ;
+        } else {
+            valoreAStampa = prefisso + " " + registro.getNome() + "=" + String.format("%1$5s", String.valueOf(valore));
+        }
+
+        valoreAStampa = String.format("%1$9s", valoreAStampa);
         System.out.print(valoreAStampa);
     }
-    public String getValoreAStampa(){
-        return valoreAStampa;
+
+    public void stampaNome() {
+
+        System.out.print(String.format("%1$3s", registro.getNome()));
+    }
+
+    public void stampaValore() {
+        System.out.print(prefisso + " " + String.format("%1$3s", String.valueOf(valore)));
     }
 }

@@ -30,8 +30,8 @@ public class CPU {
         SP = new Registro("SP", 255, controller);
 
         FLAG = new Registro("FLAG", 0, controller);
-        MDR = new Registro("MDR", 0, controller);
-        MAR = new Registro("MAR", 0, controller);
+        MDR = new Registro("MDR", -1, controller);
+        MAR = new Registro("MAR", -1, controller);
         RW = new PIN("RW", -1, controller);
     }
 

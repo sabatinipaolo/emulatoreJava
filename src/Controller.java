@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class Controller {
 
@@ -36,7 +35,7 @@ public class Controller {
         VistaRegistro v = vista.get(registro);
         v.setValore(valore);
         v.scritto();
-        utilizzati.add( registro );
+        utilizzati.add(registro);
     }
 
     public void registroHaAvutoAccesso(Registro registro) {
@@ -49,7 +48,7 @@ public class Controller {
 
     }
 
-    public void cpuHaFinitoCicloDiClock(String fase ) {
+    public void cpuHaFinitoCicloDiClock(String fase) {
 
         vista.stampaTutto();
         vista.controller.svuota(utilizzati);
@@ -59,10 +58,11 @@ public class Controller {
 
     public void svuota(ArrayList<Registro> utilizzati) {
 
-        for ( Registro r : utilizzati){
+        for (Registro r : utilizzati) {
             VistaRegistro v = vista.get(r);
             v.setNonUtilizzato();
-        };
+        }
+        ;
         utilizzati.clear();
 
     }
