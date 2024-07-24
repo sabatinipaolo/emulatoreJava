@@ -12,7 +12,7 @@ class RegistroChangedEvent extends CPUEvent {
     private Registro registro;
     public RegistroChangedEvent(Object source, Registro registro) {
 
-        super(source);
+        super(registro);
         this.registro = registro;
 
     }
