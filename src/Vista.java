@@ -6,13 +6,10 @@ public class Vista implements CPUListener {
     private Sistema sistema;
     private HashMap<Registro, VistaRegistro> viste;
     private ArrayList<Registro> utilizzati = new ArrayList<Registro>();
-    private boolean enable;
-
 
     public Vista(Sistema sistema) {
 
         this.sistema = sistema;
-        enable = false;
 
         setup();
     }
@@ -36,8 +33,6 @@ public class Vista implements CPUListener {
         for (int i = 0; i < 16; i++) {
             viste.put(sistema.RAM.get(i), new VistaRegistro("[" + i + "]", sistema.RAM.get(i)));
         }
-        ;
-
     }
 
     public void inizia() {
@@ -68,14 +63,6 @@ public class Vista implements CPUListener {
 
     public VistaRegistro get(Registro r) {
         return (viste.get(r));
-    }
-
-    public void enable() {
-        enable = true;
-    }
-
-    public boolean isNotEnabled() {
-        return (!enable);
     }
 
     public void stampaTutto() {
@@ -250,7 +237,7 @@ public class Vista implements CPUListener {
 
         System.out.println();
 
-        if (isNotEnabled()) return;
+        //if (isNotEnabled()) return;
 
         VistaRegistro v = viste.get(registro);
 

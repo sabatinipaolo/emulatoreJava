@@ -12,7 +12,6 @@ public class Controller {
         sistema.addCPUListener(vista);
         sistema.cpu.addCPUListener(vista);
 
-        vista.enable();
         vista.inizia();
     }
 
