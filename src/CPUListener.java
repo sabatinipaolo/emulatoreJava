@@ -8,5 +8,7 @@ public interface CPUListener extends EventListener {
 
     void onRegistroRead(RegistroReadEvent event);
     void onCpuHaFinitoCicloDiClockEvent( CpuHaFinitoCicloDiClockEvent event);
+
+    void onCpuAspettaImpulsoDiClockEvent(CpuAspettaImpulsoDiClockEvent event);
 }
 

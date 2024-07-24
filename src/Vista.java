@@ -269,6 +269,11 @@ public class Vista implements CPUListener {
 
     }
 
+    @Override
+    public void onCpuAspettaImpulsoDiClockEvent(CpuAspettaImpulsoDiClockEvent event) {
+        aspettaComando( "", "inserisci un comando o invio per un ciclo di clock :" );
+    }
+
     public void svuota(ArrayList<Registro> utilizzati) {
 
         for (Registro r : utilizzati) {

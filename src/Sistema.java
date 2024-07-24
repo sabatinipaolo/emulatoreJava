@@ -104,4 +104,9 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
     public void onCpuHaFinitoCicloDiClockEvent(CpuHaFinitoCicloDiClockEvent event) {
             // non deve fare niente
     }
+
+    @Override
+    public void onCpuAspettaImpulsoDiClockEvent(CpuAspettaImpulsoDiClockEvent event) {
+            // non deve fare niente
+    }
 }

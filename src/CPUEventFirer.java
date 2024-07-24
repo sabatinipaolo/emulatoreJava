@@ -38,4 +38,10 @@ public class CPUEventFirer {
             listener.onCpuHaFinitoCicloDiClockEvent( event );
         }
     }
+
+    public void fireCpuAspettaImpulsoDiClockEvent( CpuAspettaImpulsoDiClockEvent event){
+        for (CPUListener listener : listeners) {
+            listener.onCpuAspettaImpulsoDiClockEvent( event );
+        }
+    }
 }

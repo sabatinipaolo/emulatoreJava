@@ -70,7 +70,8 @@ public class CPU extends CPUEventFirer {
         move(IP,ipvalore);
 
          fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        controller.cpuAspettaUnCicloDiClock();
+        //controller.cpuAspettaUnCicloDiClock();
+        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
     }
 
     public void execute() {
@@ -81,7 +82,8 @@ public class CPU extends CPUEventFirer {
         instructionSet.esegui(opCode, controller.sistema );
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        controller.cpuAspettaUnCicloDiClock();
+        //controller.cpuAspettaUnCicloDiClock();
+        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
     }
 
     public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
@@ -95,7 +97,8 @@ public class CPU extends CPUEventFirer {
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        controller.cpuAspettaUnCicloDiClock();
+        //controller.cpuAspettaUnCicloDiClock();
+        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
 
         //ciclo = 1;
         incCiclo();
@@ -103,7 +106,8 @@ public class CPU extends CPUEventFirer {
         sistema.leggeDallaMemoria(indirizzo);
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        controller.cpuAspettaUnCicloDiClock();
+        //controller.cpuAspettaUnCicloDiClock();
+        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
 
         //ciclo = 2;
         incCiclo();
@@ -112,7 +116,9 @@ public class CPU extends CPUEventFirer {
         move(MDR, registroDestinazione);
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        controller.cpuAspettaUnCicloDiClock();
+        //controller.cpuAspettaUnCicloDiClock();
+        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
+
     }
 
     private int getValore(Registro registro) {
