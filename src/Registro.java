@@ -14,11 +14,4 @@ public class Registro {
         this.valore = valore;
     }
 
-    public void setToUno() {
-        setValore(1);
-    }
-
-    public void setToUndefined() {
-        setValore(-1);
-    }
 }

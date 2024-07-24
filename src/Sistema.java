@@ -1,5 +1,5 @@
 public class Sistema extends CPUEventFirer implements CPUListener {
-
+//TODO: è veramente necessario passare per gli eventi?
     public CPU cpu= new CPU(this);
     public Memory RAM= new Memory(this);
     public Registro controlRW=new Registro(-1);
@@ -8,19 +8,13 @@ public class Sistema extends CPUEventFirer implements CPUListener {
 
     public void Sistema() {
 
-        this.cpu.addCPUListener(this);
+       // this.cpu.addCPUListener(this);
     }
-
 
     public void cpuVuoleLeggereDallaMemoria(int indirizzo) {
 
         setToValore(controlRW, 1);
         setToValore(addressBUS, indirizzo);
-    }
-
-    private void setToValore(Registro registro, int valore) {
-        registro.setValore(valore);
-        fireRegistroChangedValue(new RegistroChangedEvent(registro, valore));
     }
 
     public void leggeDallaMemoria(int indirizzo) {
@@ -35,21 +29,25 @@ public class Sistema extends CPUEventFirer implements CPUListener {
 
     }
 
+    public void cpuHalettoDallaMemoria() {
+
+        setToUndefined(dataBUS);
+    }
+
+    private void setToValore(Registro registro, int valore) {
+        registro.setValore(valore);
+        fireRegistroChangedValue(new RegistroChangedEvent(registro, valore));
+    }
+
     private int getValore(Registro registro) {
         fireRegistroRead(new RegistroReadEvent(registro));
         return registro.getValore();
     }
 
     private void setToUndefined(Registro registro) {
-        setToValore(registro, -1);
+        setToValore(registro, -1); //TODO: defininire costante per UNDEFINED
 
     }
-
-    public void cpuHalettoDallaMemoria() {
-
-        setToUndefined(dataBUS);
-    }
-
 
     public String getStatoCpu() {
         return cpu.getStatoECiclo();
