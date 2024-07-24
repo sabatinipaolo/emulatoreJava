@@ -6,9 +6,9 @@ public class Memory {
 
         mem = new Registro[16];
 
-        mem[0] = new Registro( 8);
-        mem[1] = new Registro( 15);
-        mem[2] = new Registro( 18);
+        mem[0] = new Registro( 0);
+        mem[1] = new Registro( 8);
+        mem[2] = new Registro( 15);
         mem[3] = new Registro( 19);
         mem[4] = new Registro( 0);
         mem[5] = new Registro( 1);
