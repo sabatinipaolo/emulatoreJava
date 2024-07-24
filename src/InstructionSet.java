@@ -83,7 +83,6 @@ public class InstructionSet {
                 public void esegui(Sistema sistema) {
                     sistema.cpu.letturaDaMemoria(sistema.cpu.IP,sistema.cpu.MAR); //legge operando
                     //sistema.cpu.ciclo=1;
-                    //sistema.controller.cpuHaFinitoCicloDiClock();
 
                     sistema.cpu.letturaDaMemoria(sistema.cpu.MAR,sistema.cpu.A); // [operando] -> A
 

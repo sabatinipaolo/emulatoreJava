@@ -1,10 +1,8 @@
 public class Registro {
     private int valore;
-    //private Controller controller;
 
     public Registro( int valore) {
         this.valore = valore;
-  //      this.controller = controller;
     }
 
     public int getValore() {
