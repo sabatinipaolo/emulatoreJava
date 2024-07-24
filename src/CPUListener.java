@@ -7,5 +7,6 @@ public interface CPUListener extends EventListener {
     void onRegistroChanged ( RegistroChangedEvent event);
 
     void onRegistroRead(RegistroReadEvent event);
+    void onCpuHaFinitoCicloDiClockEvent( CpuHaFinitoCicloDiClockEvent event);
 }
 

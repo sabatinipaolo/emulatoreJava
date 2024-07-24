@@ -26,3 +26,11 @@ class RegistroReadEvent extends CPUEvent {
 
     }
 }
+class CpuHaFinitoCicloDiClockEvent extends CPUEvent {
+    public CpuHaFinitoCicloDiClockEvent(Object source) {
+
+        super(source);
+
+
+    }
+}

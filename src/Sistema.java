@@ -81,4 +81,9 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
         System.out.println( " SISTEMA : ricevuto Registro READ   Event");
 
     }
+
+    @Override
+    public void onCpuHaFinitoCicloDiClockEvent(CpuHaFinitoCicloDiClockEvent event) {
+            // non deve fare niente
+    }
 }

@@ -66,7 +66,8 @@ public class CPU extends CPUEventFirer {
         int ipvalore = IP.getValore() + 1;
         IP.setValore(ipvalore++);
 
-        controller.cpuHaFinitoCicloDiClock();
+        //controller.cpuHaFinitoCicloDiClock();
+        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         controller.cpuAspettaUnCicloDiClock();
     }
 
@@ -77,7 +78,8 @@ public class CPU extends CPUEventFirer {
 
         instructionSet.esegui(opCode, controller.sistema );
 
-        controller.cpuHaFinitoCicloDiClock();
+        //controller.cpuHaFinitoCicloDiClock();
+        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         controller.cpuAspettaUnCicloDiClock();
     }
 
@@ -91,7 +93,8 @@ public class CPU extends CPUEventFirer {
 
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
-        controller.cpuHaFinitoCicloDiClock();
+        //controller.cpuHaFinitoCicloDiClock();
+        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         controller.cpuAspettaUnCicloDiClock();
 
         //ciclo = 1;
@@ -99,7 +102,8 @@ public class CPU extends CPUEventFirer {
         //aspetta che la ram renda disponibile il dato
         sistema.leggeDallaMemoria(indirizzo);
 
-        controller.cpuHaFinitoCicloDiClock();
+        //controller.cpuHaFinitoCicloDiClock();
+        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         controller.cpuAspettaUnCicloDiClock();
 
         //ciclo = 2;
@@ -108,7 +112,8 @@ public class CPU extends CPUEventFirer {
         sistema.cpuHalettoDallaMemoria();
         move(MDR, registroDestinazione);
 
-        controller.cpuHaFinitoCicloDiClock();
+        //controller.cpuHaFinitoCicloDiClock();
+        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         controller.cpuAspettaUnCicloDiClock();
     }
 

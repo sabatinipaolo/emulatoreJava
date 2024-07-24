@@ -33,40 +33,28 @@ public class Controller {
     }
 
     public void registroHaCambiatoValoreIn(Registro registro, int valore) {
-        VistaRegistro v = vista.get(registro);
-        v.setValore(valore);
-        v.scritto();
-        utilizzati.add(registro);
+  //TODO: rimuovere
+//        VistaRegistro v = vista.get(registro);
+//        v.setValore(valore);
+//        v.scritto();
+//        utilizzati.add(registro);
     }
 
     public void registroHaAvutoAccesso(Registro registro) {
-        if (vista.isNotEnabled()) return;
-
-        VistaRegistro v = vista.get(registro);
-        v.letto();
-
-        utilizzati.add(registro);
-
-    }
-
-    public void cpuHaFinitoCicloDiClock() {
-
-        vista.stampaTutto();
-        vista.controller.svuota(utilizzati);
-        System.out.println("Controller. finita Cilco di clock " + sistema.cpu.getStatoECiclo());
-    }
-
-
-    public void svuota(ArrayList<Registro> utilizzati) {
-
-        for (Registro r : utilizzati) {
-            VistaRegistro v = vista.get(r);
-            v.setNonUtilizzato();
-        }
-        ;
-        utilizzati.clear();
+//TODO :rimuovere
+//        if (vista.isNotEnabled()) return;
+//
+//        VistaRegistro v = vista.get(registro);
+//        v.letto();
+//
+//        utilizzati.add(registro);
 
     }
+
+
+
+
+
 
     public String getStatoCpu(){
         return sistema.getStatoCpu();

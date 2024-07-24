@@ -33,5 +33,9 @@ public class CPUEventFirer {
             listener.onRegistroRead(event);
         }
     }
-
+    public void fireCpuHaFinitoCicloDiClockEvent( CpuHaFinitoCicloDiClockEvent event){
+        for (CPUListener listener : listeners) {
+            listener.onCpuHaFinitoCicloDiClockEvent( event );
+        }
+    }
 }

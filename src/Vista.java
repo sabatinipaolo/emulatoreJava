@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Vista implements CPUListener {
     Controller controller;
     private HashMap<Registro, VistaRegistro> viste;
+    private ArrayList<Registro> utilizzati = new ArrayList<Registro>();
     private boolean enable;
 
 
@@ -222,10 +224,15 @@ public class Vista implements CPUListener {
 
         Registro registro = (Registro) event.getSource();
 
-        System.out.print ( "##### MODIFICATO " );
+        System.out.print ( "##### MODIFICATO "+ event.valore );
         viste.get(registro).stampa();
 
         System.out.println();
+
+        VistaRegistro v = viste.get(registro);
+        v.setValore(event.valore);
+        v.scritto();
+        utilizzati.add(registro);
 
     }
 
@@ -238,6 +245,38 @@ public class Vista implements CPUListener {
         viste.get(registro).stampa();
 
         System.out.println();
+
+        if ( isNotEnabled()) return;
+
+        //VistaRegistro v = vista.get(registro);
+
+        VistaRegistro v = viste.get(registro);
+
+        v.letto();
+
+        utilizzati.add(registro);
+
+
+
+    }
+
+    @Override
+    public void onCpuHaFinitoCicloDiClockEvent(CpuHaFinitoCicloDiClockEvent event) {
+        stampaTutto();
+        svuota(utilizzati);
+        System.out.println("Controller. finita Cilco di clock " + controller.sistema.cpu.getStatoECiclo());
+
+
+    }
+
+    public void svuota(ArrayList<Registro> utilizzati) {
+
+        for (Registro r : utilizzati) {
+            VistaRegistro v = viste.get(r);
+            v.setNonUtilizzato();
+        }
+        ;
+        utilizzati.clear();
 
     }
 }
