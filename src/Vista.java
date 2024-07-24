@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Vista {
+public class Vista implements CPUListener {
     Controller controller;
     private HashMap<Registro, VistaRegistro> viste;
     private boolean enable;
@@ -211,6 +211,24 @@ public class Vista {
     }
 
 
+    @Override
+    public void onCPUEvent(CPUEvent event) {
+
+    }
+
+    @Override
+    public void onRegistroChanged(RegistroChangedEvent event) {
+
+        Registro registro = (Registro) event.getSource();
+
+        System.out.println( "#########################################################################################");
+        viste.get(registro).stampa();
+        System.out.println( "#########################################################################################");
+
+
+        System.out.println();
+
+    }
 }
 
 
