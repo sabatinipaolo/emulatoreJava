@@ -43,7 +43,7 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
         setToUndefined (addressBUS);
         setToUndefined(controlRW);
 
-        int dato=getValore(RAM.mem[indirizzo]);
+        int dato=getValore( RAM.get(indirizzo) );
 
         setToValore(dataBUS,dato);
         setToValore(cpu.MDR,dato);

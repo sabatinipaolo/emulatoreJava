@@ -1,5 +1,5 @@
 public class Memory {
-    Registro[] mem;
+    private Registro[] mem;
 
     private Sistema sistema;  //TODO: vedi se necessario
     public Memory(Sistema sistema) {
@@ -29,5 +29,9 @@ public class Memory {
 
         return mem[indirizzo].getValore();
 
+    }
+
+    public Registro get(int indirizzo) {
+        return  mem[indirizzo];
     }
 }

@@ -32,9 +32,8 @@ public class Vista implements CPUListener {
         viste.put(controller.sistema.controlRW, new VistaRegistro("RW cntl Bus",controller.sistema.controlRW));
 
         for (int i = 0; i < 16; i++) {
-            viste.put(controller.sistema.RAM.mem[i], new VistaRegistro("["+i+"]",controller.sistema.RAM.mem[i]));
-        }
-        ;
+            viste.put(controller.sistema.RAM.get(i), new VistaRegistro("["+i+"]",controller.sistema.RAM.get(i)));
+        };
 
     }
 
@@ -175,7 +174,7 @@ public class Vista implements CPUListener {
         //riga
         {
             for (int i = 0; i < 16; i++) {
-                VistaRegistro vr = viste.get(controller.sistema.RAM.mem[i]);
+                VistaRegistro vr = viste.get(controller.sistema.RAM.get(i));
                 System.out.print("| ");
                 vr.stampaValore();
                 System.out.print(" ");
@@ -194,7 +193,7 @@ public class Vista implements CPUListener {
         //riga
         {
             for (int i = 0; i < 16; i++) {
-                VistaRegistro vr = viste.get(controller.sistema.RAM.mem[i]);
+                VistaRegistro vr = viste.get(controller.sistema.RAM.get(i));
                 System.out.print("  ");
                 System.out.print( String.format("%1$3s",i));
                 System.out.print("   ");
