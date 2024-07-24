@@ -1,40 +1,26 @@
 public class CPU extends CPUEventFirer {
-    public Registro A;
-    public Registro B;
-    public Registro C;
-    public Registro D;
-    public Registro IR;
-    public Registro IP;
-    public Registro SP;
-    public Registro FLAG;
-    public Registro MDR;
-    public Registro MAR;
-    public Registro RW;
-    private String stato;
+    public Registro A = new Registro(0);
+    public Registro B = new Registro(0);
+    public Registro C = new Registro(0);
+    public Registro D = new Registro(0);
+    public Registro IR = new Registro(0);
+    public Registro IP = new Registro(0);
+    public Registro SP = new Registro(255);
+    public Registro FLAG = new Registro(0);
+    public Registro MDR = new Registro(0);
+    public Registro MAR = new Registro(0);
+    public Registro RW = new Registro(0);
+    private String stato = "Power OFF";
     private int ciclo = 0;
     private Sistema sistema;
     private InstructionSet instructionSet = new InstructionSet(this);
 
-    private String decodifica;
+    private String decodifica = "";
 
     public CPU(Sistema sistema) {
-        //this.controller = controller;
+
         this.sistema = sistema;
-        this.decodifica = "";
 
-        stato = "power OFF";
-        A = new Registro(0);
-        B = new Registro(0);
-        C = new Registro(0);
-        D = new Registro(0);
-        IP = new Registro(0);
-        IR = new Registro(0);
-        SP = new Registro(255);
-
-        FLAG = new Registro(0);
-        MDR = new Registro(-1);
-        MAR = new Registro(-1);
-        RW = new Registro(-1);
     }
 
     public void avvia() {
@@ -68,11 +54,6 @@ public class CPU extends CPUEventFirer {
         inc(IP);
 
         finitoCicloDiClock();
-    }
-
-    private void finitoCicloDiClock() {
-        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this));
     }
 
     public void execute(Istruzione istruzione) {
@@ -113,7 +94,6 @@ public class CPU extends CPUEventFirer {
         finitoCicloDiClock();
 
     }
-
 
     public String getStatoECiclo() {
         return stato + "-" + ciclo;
@@ -156,7 +136,6 @@ public class CPU extends CPUEventFirer {
         registro.setValore(operando);
     }
 
-
     public boolean isInDecodeOrExecute() {
 
         return stato.equals("DECODE") || stato.equals("EXECUTE");
@@ -165,4 +144,10 @@ public class CPU extends CPUEventFirer {
     public void incCiclo() {
         ciclo++;
     }
+
+    private void finitoCicloDiClock() {
+        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
+        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this));
+    }
+
 }
