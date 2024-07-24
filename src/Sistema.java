@@ -10,7 +10,10 @@ public class Sistema implements  CPUListener {
     public void setup(Controller controller) {
         this.controller = controller;
         this.cpu = new CPU(controller);
+
         this.cpu.addCPUListener(this);
+        this.cpu.addCPUListener(controller.vista);
+
         this.RAM = new Memory(controller);
         this.addressBUS = new Registro( -1, controller);
         this.dataBUS = new Registro( -1, controller);
@@ -56,7 +59,7 @@ public class Sistema implements  CPUListener {
     }
 
     @Override
-    public void onRegistroChanged(CPUEvent event) {
+    public void onRegistroChanged(RegistroChangedEvent event) {
 
         System.out.println( " SISTEMA : ricevuto RegistroChanged  Event");
 
