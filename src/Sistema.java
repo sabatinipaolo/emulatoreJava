@@ -15,9 +15,9 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
 
 
         this.RAM = new Memory(controller);
-        this.addressBUS = new Registro( -1, controller);
-        this.dataBUS = new Registro( -1, controller);
-        this.controlRW = new Registro( -1, controller);
+        this.addressBUS = new Registro( -1);
+        this.dataBUS = new Registro( -1);
+        this.controlRW = new Registro( -1);
     }
 
 

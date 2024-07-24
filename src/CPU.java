@@ -26,18 +26,18 @@ public class CPU extends CPUEventFirer {
         this.decodifica = "";
 
         stato = "power OFF";
-        A = new Registro(0, controller);
-        B = new Registro(0, controller);
-        C = new Registro(0, controller);
-        D = new Registro(0, controller);
-        IP = new Registro(0, controller);
-        IR = new Registro(0, controller);
-        SP = new Registro(255, controller);
+        A = new Registro(0);
+        B = new Registro(0);
+        C = new Registro(0);
+        D = new Registro(0);
+        IP = new Registro(0);
+        IR = new Registro(0);
+        SP = new Registro(255);
 
-        FLAG = new Registro(0, controller);
-        MDR = new Registro(-1, controller);
-        MAR = new Registro(-1, controller);
-        RW = new Registro(-1, controller);
+        FLAG = new Registro(0);
+        MDR = new Registro(-1);
+        MAR = new Registro(-1);
+        RW = new Registro(-1);
     }
 
     public void avvia() {
