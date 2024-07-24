@@ -60,15 +60,11 @@ public class CPU extends CPUEventFirer {
     public void decode() {
         stato = "DECODE";
         ciclo = 0;
-        //opCode = IR.getValore();
 
         opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
         decodifica = instructionSet.decodifica(opCode);
 
-//        int ipvalore = IP.getValore() + 1;
-//        move(IP,ipvalore);
         inc(IP);
-
 
         finitoCicloDiClock();
     }
