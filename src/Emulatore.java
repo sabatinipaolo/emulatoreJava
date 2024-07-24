@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-public class Controller {
+public class Emulatore {
 
     public static Sistema sistema;
     public static Vista vista;

@@ -13,7 +13,6 @@ public class CPU extends CPUEventFirer {
     private String stato;
     private int ciclo = 0;
     private Sistema sistema;
-    private Controller controller;
     private InstructionSet instructionSet = new InstructionSet(this);
 
     private String decodifica;
