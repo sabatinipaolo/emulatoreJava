@@ -81,9 +81,10 @@ public class InstructionSet {
         {   int opCode = 8;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, [ ind ]") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.letturaDaMemoria(sistema.cpu.IP,sistema.cpu.MAR); //legge operando
-                    //sistema.cpu.ciclo=1;
 
+                    sistema.cpu.letturaDaMemoria(sistema.cpu.IP,sistema.cpu.MAR); //legge operando
+
+                    sistema.cpu.incCiclo();
                     sistema.cpu.letturaDaMemoria(sistema.cpu.MAR,sistema.cpu.A); // [operando] -> A
 
                     sistema.cpu.incCiclo();
