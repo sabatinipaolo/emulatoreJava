@@ -14,7 +14,7 @@ public class Sistema extends CPUEventFirer implements CPUListener {
 
     public void cpuVuoleLeggereDallaMemoria(int indirizzo) {
 
-        setToUno(controlRW);
+        setToValore(controlRW, 1);
         setToValore(addressBUS, indirizzo);
     }
 
@@ -22,12 +22,6 @@ public class Sistema extends CPUEventFirer implements CPUListener {
         registro.setValore(valore);
         fireRegistroChangedValue(new RegistroChangedEvent(registro, valore));
     }
-
-    private void setToUno(Registro registro) {
-        registro.setToUno();
-        fireRegistroChangedValue(new RegistroChangedEvent(registro, 1));
-    }
-
 
     public void leggeDallaMemoria(int indirizzo) {
 
