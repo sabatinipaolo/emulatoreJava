@@ -28,7 +28,7 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
     }
 
     private void setToValore(Registro registro, int valore) {
-        registro.setValore(0);
+        registro.setValore(valore);
         fireRegistroChangedValue( new RegistroChangedEvent(registro , valore));
     }
 
