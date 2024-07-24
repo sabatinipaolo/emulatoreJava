@@ -16,7 +16,7 @@ public class CPUEventFirer {
         listeners.remove(listener);
     }
 
-    private void fireCpuEvent(CPUEvent event) {
+    public void fireCpuEvent(CPUEvent event) {
         for (CPUListener listener : listeners) {
             listener.onCPUEvent(event);
         }
