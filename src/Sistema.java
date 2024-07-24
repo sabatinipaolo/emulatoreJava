@@ -39,17 +39,11 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
 
 
     public void leggeDallaMemoria(int indirizzo) {
-        //addressBUS.setToUndefined();
+
         setToUndefined (addressBUS);
-        //controlRW.setToUndefined();
         setToUndefined(controlRW);
 
-        //int dato = RAM.getValore(indirizzo);
-
         int dato=getValore(RAM.mem[indirizzo]);
-
-        //dataBUS.setValore(dato);
-        //cpu.MDR.setValore(dato);
 
         setToValore(dataBUS,dato);
         setToValore(cpu.MDR,dato);
@@ -69,7 +63,6 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
     public void cpuHalettoDallaMemoria() {
 
         setToUndefined(dataBUS);
-        //dataBUS.setToUndefined();
     }
 
 

@@ -32,30 +32,6 @@ public class Controller {
         this.vista = v;
     }
 
-    public void registroHaCambiatoValoreIn(Registro registro, int valore) {
-  //TODO: rimuovere
-//        VistaRegistro v = vista.get(registro);
-//        v.setValore(valore);
-//        v.scritto();
-//        utilizzati.add(registro);
-    }
-
-    public void registroHaAvutoAccesso(Registro registro) {
-//TODO :rimuovere
-//        if (vista.isNotEnabled()) return;
-//
-//        VistaRegistro v = vista.get(registro);
-//        v.letto();
-//
-//        utilizzati.add(registro);
-
-    }
-
-
-
-
-
-
     public String getStatoCpu(){
         return sistema.getStatoCpu();
     }
@@ -63,10 +39,6 @@ public class Controller {
     public String getDecodifica() {
         return ( sistema.cpu.getDecodifica());
 
-    }
-
-    public void cpuAspettaUnCicloDiClock() {
-        vista.aspettaComando( "", "inserisci un comando o invio per un ciclo di clock :" );
     }
 
     public void avviaSistema() {

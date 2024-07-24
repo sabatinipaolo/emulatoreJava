@@ -248,9 +248,7 @@ public class Vista implements CPUListener {
 
         if ( isNotEnabled()) return;
 
-        //VistaRegistro v = vista.get(registro);
-
-        VistaRegistro v = viste.get(registro);
+         VistaRegistro v = viste.get(registro);
 
         v.letto();
 
@@ -279,8 +277,8 @@ public class Vista implements CPUListener {
         for (Registro r : utilizzati) {
             VistaRegistro v = viste.get(r);
             v.setNonUtilizzato();
-        }
-        ;
+        };
+
         utilizzati.clear();
 
     }

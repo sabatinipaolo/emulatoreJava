@@ -66,11 +66,9 @@ public class CPU extends CPUEventFirer {
         decodifica = instructionSet.decodifica(opCode);
 
         int ipvalore = IP.getValore() + 1;
-        //IP.setValore(ipvalore++);
         move(IP,ipvalore);
 
          fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        //controller.cpuAspettaUnCicloDiClock();
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
     }
 
@@ -82,7 +80,6 @@ public class CPU extends CPUEventFirer {
         instructionSet.esegui(opCode, controller.sistema );
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        //controller.cpuAspettaUnCicloDiClock();
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
     }
 
@@ -97,7 +94,6 @@ public class CPU extends CPUEventFirer {
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        //controller.cpuAspettaUnCicloDiClock();
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
 
         //ciclo = 1;
@@ -106,7 +102,6 @@ public class CPU extends CPUEventFirer {
         sistema.leggeDallaMemoria(indirizzo);
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        //controller.cpuAspettaUnCicloDiClock();
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
 
         //ciclo = 2;
@@ -116,7 +111,6 @@ public class CPU extends CPUEventFirer {
         move(MDR, registroDestinazione);
 
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        //controller.cpuAspettaUnCicloDiClock();
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
 
     }
