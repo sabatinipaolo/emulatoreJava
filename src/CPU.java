@@ -96,7 +96,6 @@ public class CPU extends CPUEventFirer {
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
 
-        //ciclo = 1;
         incCiclo();
         //aspetta che la ram renda disponibile il dato
         sistema.leggeDallaMemoria(indirizzo);
@@ -115,12 +114,6 @@ public class CPU extends CPUEventFirer {
 
     }
 
-    private int getValore(Registro registro) {
-        int valore = registro.getValore();
-        fireRegistroRead( new RegistroReadEvent(registro));
-        return valore;
-
-    }
 
     public String getStatoECiclo() {
         return stato + "-" + ciclo;
@@ -130,6 +123,12 @@ public class CPU extends CPUEventFirer {
         return decodifica;
     }
 
+    private int getValore(Registro registro) {
+        int valore = registro.getValore();
+        fireRegistroRead( new RegistroReadEvent(registro));
+        return valore;
+
+    }
     public void move(Registro sorg, Registro dest) {
 
         dest.setValore(sorg.getValore());
