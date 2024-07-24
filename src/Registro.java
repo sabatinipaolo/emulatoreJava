@@ -1,7 +1,7 @@
 public class Registro {
     private int valore;
 
-    public Registro( int valore) {
+    public Registro(int valore) {
         this.valore = valore;
     }
 

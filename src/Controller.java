@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Controller {
 
-    public  static Sistema sistema;
+    public static Sistema sistema;
     public static Vista vista;
 
     private ArrayList<Registro> utilizzati = new ArrayList<Registro>();
@@ -16,9 +16,8 @@ public class Controller {
         controller.setVistaEModello(vista, sistema);
 
 
-
         sistema.setup();
-        vista.setup(controller,sistema);
+        vista.setup(controller, sistema);
 
         sistema.addCPUListener(vista);
         sistema.cpu.addCPUListener(vista);
@@ -32,12 +31,12 @@ public class Controller {
         this.vista = v;
     }
 
-    public String getStatoCpu(){
+    public String getStatoCpu() {
         return sistema.getStatoCpu();
     }
 
     public String getDecodifica() {
-        return ( sistema.cpu.getDecodifica());
+        return (sistema.cpu.getDecodifica());
 
     }
 

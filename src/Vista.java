@@ -19,43 +19,46 @@ public class Vista implements CPUListener {
 
         viste = new HashMap<Registro, VistaRegistro>();
         viste.put(controller.sistema.cpu.MAR, new VistaRegistro("MAR", controller.sistema.cpu.MAR));
-        viste.put(controller.sistema.cpu.MDR, new VistaRegistro("MDR",controller.sistema.cpu.MDR));
-        viste.put(controller.sistema.cpu.IP, new VistaRegistro("IP",controller.sistema.cpu.IP));
-        viste.put(controller.sistema.cpu.IR, new VistaRegistro("IR",controller.sistema.cpu.IR));
-        viste.put(controller.sistema.cpu.A, new VistaRegistro("A",controller.sistema.cpu.A));
-        viste.put(controller.sistema.cpu.B, new VistaRegistro("B",controller.sistema.cpu.B));
-        viste.put(controller.sistema.cpu.C, new VistaRegistro("C",controller.sistema.cpu.C));
-        viste.put(controller.sistema.cpu.D, new VistaRegistro("D",controller.sistema.cpu.D));
-        viste.put(controller.sistema.cpu.RW, new VistaRegistro("RW",controller.sistema.cpu.RW));
-        viste.put(controller.sistema.addressBUS, new VistaRegistro("address Bus",controller.sistema.addressBUS));
-        viste.put(controller.sistema.dataBUS, new VistaRegistro("data Bus",controller.sistema.dataBUS));
-        viste.put(controller.sistema.controlRW, new VistaRegistro("RW cntl Bus",controller.sistema.controlRW));
+        viste.put(controller.sistema.cpu.MDR, new VistaRegistro("MDR", controller.sistema.cpu.MDR));
+        viste.put(controller.sistema.cpu.IP, new VistaRegistro("IP", controller.sistema.cpu.IP));
+        viste.put(controller.sistema.cpu.IR, new VistaRegistro("IR", controller.sistema.cpu.IR));
+        viste.put(controller.sistema.cpu.A, new VistaRegistro("A", controller.sistema.cpu.A));
+        viste.put(controller.sistema.cpu.B, new VistaRegistro("B", controller.sistema.cpu.B));
+        viste.put(controller.sistema.cpu.C, new VistaRegistro("C", controller.sistema.cpu.C));
+        viste.put(controller.sistema.cpu.D, new VistaRegistro("D", controller.sistema.cpu.D));
+        viste.put(controller.sistema.cpu.RW, new VistaRegistro("RW", controller.sistema.cpu.RW));
+        viste.put(controller.sistema.addressBUS, new VistaRegistro("address Bus", controller.sistema.addressBUS));
+        viste.put(controller.sistema.dataBUS, new VistaRegistro("data Bus", controller.sistema.dataBUS));
+        viste.put(controller.sistema.controlRW, new VistaRegistro("RW cntl Bus", controller.sistema.controlRW));
 
         for (int i = 0; i < 16; i++) {
-            viste.put(controller.sistema.RAM.get(i), new VistaRegistro("["+i+"]",controller.sistema.RAM.get(i)));
-        };
+            viste.put(controller.sistema.RAM.get(i), new VistaRegistro("[" + i + "]", controller.sistema.RAM.get(i)));
+        }
+        ;
 
     }
 
     public void inizia() {
         stampaTutto();
-        aspettaComando("" , "inserisci un comando o invio per AVVIARE :");
+        aspettaComando("", "inserisci un comando o invio per AVVIARE :");
         controller.avviaSistema();
     }
-    public void aspettaComando( String comando ,String messaggio ){
+
+    public void aspettaComando(String comando, String messaggio) {
         Scanner scanner = new Scanner(System.in);
         String input;
 
         System.out.print(messaggio);
         input = scanner.nextLine();
 
-        while (!(input.equals("END")  ) ){
+        while (!(input.equals("END"))) {
             if (input.equals(comando)) {
                 return;
             }
             System.out.print(messaggio);
             input = scanner.nextLine();
-        } ;
+        }
+        ;
 
         scanner.close();
         System.exit(0);
@@ -195,7 +198,7 @@ public class Vista implements CPUListener {
             for (int i = 0; i < 16; i++) {
                 VistaRegistro vr = viste.get(controller.sistema.RAM.get(i));
                 System.out.print("  ");
-                System.out.print( String.format("%1$3s",i));
+                System.out.print(String.format("%1$3s", i));
                 System.out.print("   ");
 
             }
@@ -203,11 +206,11 @@ public class Vista implements CPUListener {
         }
 
         System.out.println();
-        System.out.println("STATO CPU = "+controller.getStatoCpu());
+        System.out.println("STATO CPU = " + controller.getStatoCpu());
         System.out.println();
 
-        if(controller.sistema.isInDecodeOrExecute() )
-            System.out.println("istruzione ="+ controller.getDecodifica());
+        if (controller.sistema.isInDecodeOrExecute())
+            System.out.println("istruzione =" + controller.getDecodifica());
         else System.out.println();
         System.out.println();
     }
@@ -223,7 +226,7 @@ public class Vista implements CPUListener {
 
         Registro registro = (Registro) event.getSource();
 
-        System.out.print ( "##### MODIFICATO "+ event.valore );
+        System.out.print("##### MODIFICATO " + event.valore);
         viste.get(registro).stampa();
 
         System.out.println();
@@ -239,20 +242,19 @@ public class Vista implements CPUListener {
     public void onRegistroRead(RegistroReadEvent event) {
         Registro registro = (Registro) event.getSource();
 
-        System.out.print ( "##### LETTO      " );
+        System.out.print("##### LETTO      ");
 
         viste.get(registro).stampa();
 
         System.out.println();
 
-        if ( isNotEnabled()) return;
+        if (isNotEnabled()) return;
 
-         VistaRegistro v = viste.get(registro);
+        VistaRegistro v = viste.get(registro);
 
         v.letto();
 
         utilizzati.add(registro);
-
 
 
     }
@@ -268,7 +270,7 @@ public class Vista implements CPUListener {
 
     @Override
     public void onCpuAspettaImpulsoDiClockEvent(CpuAspettaImpulsoDiClockEvent event) {
-        aspettaComando( "", "inserisci un comando o invio per un ciclo di clock :" );
+        aspettaComando("", "inserisci un comando o invio per un ciclo di clock :");
     }
 
     public void svuota(ArrayList<Registro> utilizzati) {
@@ -276,7 +278,8 @@ public class Vista implements CPUListener {
         for (Registro r : utilizzati) {
             VistaRegistro v = viste.get(r);
             v.setNonUtilizzato();
-        };
+        }
+        ;
 
         utilizzati.clear();
 
@@ -291,7 +294,7 @@ class VistaRegistro {
     private Registro registro;
     private String nome;
 
-    public VistaRegistro(String nome , Registro registro) {
+    public VistaRegistro(String nome, Registro registro) {
         prefisso = " ";
         this.nome = nome;
         this.registro = registro;

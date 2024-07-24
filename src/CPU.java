@@ -73,7 +73,7 @@ public class CPU extends CPUEventFirer {
 
     private void finitoCicloDiClock() {
         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
+        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this));
     }
 
     public void execute(Istruzione istruzione) {
@@ -88,11 +88,11 @@ public class CPU extends CPUEventFirer {
 
     public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
         //ciclo = 0;
-        int indirizzo = getValore( registroIndirizzo );
+        int indirizzo = getValore(registroIndirizzo);
 
         move(MAR, registroIndirizzo.getValore());
 
-        move(RW , 1) ;
+        move(RW, 1);
 
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
@@ -126,29 +126,33 @@ public class CPU extends CPUEventFirer {
 
     private int getValore(Registro registro) {
         int valore = registro.getValore();
-        fireRegistroRead( new RegistroReadEvent(registro));
+        fireRegistroRead(new RegistroReadEvent(registro));
         return valore;
 
     }
+
     public void move(Registro sorg, Registro dest) {
 
         dest.setValore(sorg.getValore());
         fireRegistroRead(new RegistroReadEvent(sorg));
-        fireRegistroChangedValue(new RegistroChangedEvent(dest,dest.getValore()));
+        fireRegistroChangedValue(new RegistroChangedEvent(dest, dest.getValore()));
 
 
     }
-    private void move (Registro registro , int valore){
+
+    private void move(Registro registro, int valore) {
 
         registro.setValore(valore);
-        fireRegistroChangedValue(new RegistroChangedEvent(registro,valore));
+        fireRegistroChangedValue(new RegistroChangedEvent(registro, valore));
 
     }
-    public void inc(Registro registro){
+
+    public void inc(Registro registro) {
         int valoreIncrementato = registro.getValore() + 1;
-        move(registro,valoreIncrementato);
+        move(registro, valoreIncrementato);
     }
-    public void decRegistro(Registro registro){
+
+    public void decRegistro(Registro registro) {
         int operando = registro.getValore() - 1;
         registro.setValore(operando);
     }
@@ -159,6 +163,7 @@ public class CPU extends CPUEventFirer {
         return stato.equals("DECODE") || stato.equals("EXECUTE");
     }
 
-    public void incCiclo() { ciclo ++;
+    public void incCiclo() {
+        ciclo++;
     }
 }

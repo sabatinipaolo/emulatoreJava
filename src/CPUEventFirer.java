@@ -22,26 +22,27 @@ public class CPUEventFirer {
         }
     }
 
-    public void fireRegistroChangedValue( RegistroChangedEvent event){
+    public void fireRegistroChangedValue(RegistroChangedEvent event) {
         for (CPUListener listener : listeners) {
             listener.onRegistroChanged(event);
         }
     }
 
-    public void fireRegistroRead( RegistroReadEvent event){
+    public void fireRegistroRead(RegistroReadEvent event) {
         for (CPUListener listener : listeners) {
             listener.onRegistroRead(event);
         }
     }
-    public void fireCpuHaFinitoCicloDiClockEvent( CpuHaFinitoCicloDiClockEvent event){
+
+    public void fireCpuHaFinitoCicloDiClockEvent(CpuHaFinitoCicloDiClockEvent event) {
         for (CPUListener listener : listeners) {
-            listener.onCpuHaFinitoCicloDiClockEvent( event );
+            listener.onCpuHaFinitoCicloDiClockEvent(event);
         }
     }
 
-    public void fireCpuAspettaImpulsoDiClockEvent( CpuAspettaImpulsoDiClockEvent event){
+    public void fireCpuAspettaImpulsoDiClockEvent(CpuAspettaImpulsoDiClockEvent event) {
         for (CPUListener listener : listeners) {
-            listener.onCpuAspettaImpulsoDiClockEvent( event );
+            listener.onCpuAspettaImpulsoDiClockEvent(event);
         }
     }
 }
