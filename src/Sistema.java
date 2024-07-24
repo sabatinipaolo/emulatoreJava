@@ -12,7 +12,6 @@ public class Sistema implements  CPUListener {
         this.cpu = new CPU(controller);
 
         this.cpu.addCPUListener(this);
-        this.cpu.addCPUListener(controller.vista);
 
         this.RAM = new Memory(controller);
         this.addressBUS = new Registro( -1, controller);

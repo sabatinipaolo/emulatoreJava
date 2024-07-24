@@ -16,7 +16,7 @@ public class Controller {
         controller.setVistaEModello(vista, sistema);
 
         sistema.setup(controller);
-        vista.setup(controller);
+        vista.setup(controller,sistema);
 
         vista.enable();
         vista.inizia();
