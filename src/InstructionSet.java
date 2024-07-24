@@ -12,7 +12,7 @@ public class InstructionSet {
         {   int opCode = 0;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC A") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.incRegistro( sistema.cpu.A);
+                    sistema.cpu.inc( sistema.cpu.A);
                 }
 
             }));
@@ -21,7 +21,7 @@ public class InstructionSet {
         {   int opCode = 1;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC B") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.incRegistro( sistema.cpu.B);
+                    sistema.cpu.inc( sistema.cpu.B);
                 }
 
             }));
@@ -30,7 +30,7 @@ public class InstructionSet {
         {   int opCode = 2;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC C") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.incRegistro( sistema.cpu.C);
+                    sistema.cpu.inc( sistema.cpu.C);
                 }
             }));
         }
@@ -38,7 +38,7 @@ public class InstructionSet {
         {   int opCode = 3;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC D") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.incRegistro( sistema.cpu.D);
+                    sistema.cpu.inc( sistema.cpu.D);
                 }
             }));
         }
@@ -88,7 +88,7 @@ public class InstructionSet {
                     sistema.cpu.letturaDaMemoria(sistema.cpu.MAR,sistema.cpu.A); // [operando] -> A
 
                     sistema.cpu.incCiclo();
-                    sistema.cpu.incRegistro(sistema.cpu.IP);
+                    sistema.cpu.inc(sistema.cpu.IP);
 
 
                 }

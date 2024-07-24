@@ -65,8 +65,10 @@ public class CPU extends CPUEventFirer {
         opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
         decodifica = instructionSet.decodifica(opCode);
 
-        int ipvalore = IP.getValore() + 1;
-        move(IP,ipvalore);
+//        int ipvalore = IP.getValore() + 1;
+//        move(IP,ipvalore);
+        inc(IP);
+
 
         finitoCicloDiClock();
     }
@@ -144,7 +146,7 @@ public class CPU extends CPUEventFirer {
         fireRegistroChangedValue(new RegistroChangedEvent(registro,valore));
 
     }
-    public void incRegistro(Registro registro){
+    public void inc(Registro registro){
         int valoreIncrementato = registro.getValore() + 1;
         move(registro,valoreIncrementato);
     }
