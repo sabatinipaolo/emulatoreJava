@@ -21,4 +21,11 @@ public class CPUEventFirer {
             listener.onCPUEvent(event);
         }
     }
+
+    public void fireRegistroChangedValue( RegistroChangedEvent event){
+        for (CPUListener listener : listeners) {
+            listener.onRegistroChanged(event);
+        }
+    }
+
 }
