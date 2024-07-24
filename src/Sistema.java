@@ -54,4 +54,11 @@ public class Sistema implements  CPUListener {
     public void onCPUEvent(CPUEvent event) {
         System.out.println( " SISTEMA : ricevuto CPU Event");
     }
+
+    @Override
+    public void onRegistroChanged(CPUEvent event) {
+
+        System.out.println( " SISTEMA : ricevuto RegistroChanged  Event");
+
+    }
 }
