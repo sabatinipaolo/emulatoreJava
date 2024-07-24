@@ -86,6 +86,9 @@ public class CPU extends CPUEventFirer {
         int indirizzo = registroIndirizzo.getValore();
         MAR.setValore(indirizzo);
         RW.setToUno();
+
+        fireRegistroChangedValue( new RegistroChangedEvent(this, IP));
+
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
         controller.cpuHaFinitoCicloDiClock();
