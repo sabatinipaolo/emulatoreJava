@@ -39,19 +39,37 @@ public class Sistema extends  CPUEventFirer implements  CPUListener {
 
 
     public void leggeDallaMemoria(int indirizzo) {
-        addressBUS.setToUndefined();
-        controlRW.setToUndefined();
-        int dato = RAM.getValore(indirizzo);
+        //addressBUS.setToUndefined();
+        setToUndefined (addressBUS);
+        //controlRW.setToUndefined();
+        setToUndefined(controlRW);
 
-        dataBUS.setValore(dato);
-        cpu.MDR.setValore(dato);
+        //int dato = RAM.getValore(indirizzo);
+
+        int dato=getValore(RAM.mem[indirizzo]);
+
+        //dataBUS.setValore(dato);
+        //cpu.MDR.setValore(dato);
+
+        setToValore(dataBUS,dato);
+        setToValore(cpu.MDR,dato);
+
+    }
+
+    private int getValore( Registro registro) {
+        fireRegistroRead( new RegistroReadEvent(registro) );
+        return registro.getValore();
+    }
+
+    private void setToUndefined(Registro registro) {
+        setToValore( registro,-1 );
 
     }
 
     public void cpuHalettoDallaMemoria() {
 
-
-        dataBUS.setToUndefined();
+        setToUndefined(dataBUS);
+        //dataBUS.setToUndefined();
     }
 
 

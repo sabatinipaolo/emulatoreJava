@@ -60,11 +60,14 @@ public class CPU extends CPUEventFirer {
     public void decode() {
         stato = "DECODE";
         ciclo = 0;
-        opCode = IR.getValore();
+        //opCode = IR.getValore();
+        opCode = getValore(IR);
+
         decodifica = instructionSet.decodifica(opCode);
 
         int ipvalore = IP.getValore() + 1;
-        IP.setValore(ipvalore++);
+        //IP.setValore(ipvalore++);
+        move(IP,ipvalore);
 
          fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         controller.cpuAspettaUnCicloDiClock();
