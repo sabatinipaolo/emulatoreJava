@@ -61,7 +61,7 @@ public class CPU extends CPUEventFirer {
         stato = "DECODE";
         ciclo = 0;
         //opCode = IR.getValore();
-        opCode = getValore(IR);
+        opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
 
         decodifica = instructionSet.decodifica(opCode);
 
