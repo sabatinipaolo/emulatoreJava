@@ -17,7 +17,7 @@ public class Controller {
 
 
 
-        sistema.setup(controller);
+        sistema.setup();
         vista.setup(controller,sistema);
 
         sistema.addCPUListener(vista);

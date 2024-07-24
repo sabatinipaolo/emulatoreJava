@@ -1,8 +1,8 @@
 public class Memory {
     Registro[] mem;
-    private Controller controller;
 
-    public Memory(Controller controller) {
+    private Sistema sistema;  //TODO: vedi se necessario
+    public Memory(Sistema sistema) {
 
         mem = new Registro[16];
 

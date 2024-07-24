@@ -20,9 +20,9 @@ public class CPU extends CPUEventFirer {
     private String decodifica;
     private int opCode;
 
-    public CPU(Controller controller) {
-        this.controller = controller;
-        this.sistema = controller.sistema;
+    public CPU(Sistema sistema) {
+        //this.controller = controller;
+        this.sistema = sistema;
         this.decodifica = "";
 
         stato = "power OFF";
