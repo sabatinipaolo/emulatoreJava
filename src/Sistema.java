@@ -1,4 +1,4 @@
-public class Sistema {
+public class Sistema implements  CPUListener {
 
     public CPU cpu;
     public Memory RAM;
@@ -10,6 +10,7 @@ public class Sistema {
     public void setup(Controller controller) {
         this.controller = controller;
         this.cpu = new CPU(controller);
+        this.cpu.addCPUListener(this);
         this.RAM = new Memory(controller);
         this.addressBUS = new Registro( -1, controller);
         this.dataBUS = new Registro( -1, controller);
@@ -47,5 +48,10 @@ public class Sistema {
     public boolean isInDecodeOrExecute() {
 
         return (cpu.isInDecodeOrExecute());
+    }
+
+    @Override
+    public void onCPUEvent(CPUEvent event) {
+        System.out.println( " SISTEMA : ricevuto CPU Event");
     }
 }

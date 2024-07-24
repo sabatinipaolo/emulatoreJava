@@ -1,4 +1,4 @@
-public class CPU {
+public class CPU extends CPUEventFirer {
     private String stato;
     private int ciclo = 0;
 
@@ -46,6 +46,7 @@ public class CPU {
             fetch();
             decode();
             execute();
+            fireCpuEvent(new CPUEvent( this));
         }
     }
 
