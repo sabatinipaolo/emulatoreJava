@@ -123,19 +123,13 @@ public class InstructionSet {
 
     }
 
-    public String decodifica(int opCode){
-
+    public Istruzione getIstruzione(int opCode) {
         Istruzione istruzione = istruzioni.get(opCode);
-        if (istruzione==null) return " NOP !!!" ;
-        return istruzione.getDecodifica();
+        if (istruzione == null) return (new Istruzione(opCode, "NOP ") {
+            public void esegui(Sistema sistema) {
+            }
+        });
+        return istruzioni.get(opCode);
 
-    }
-
-    public void esegui(int opCode , Sistema sistema) {
-
-        Istruzione istruzione = istruzioni.get(opCode);
-        if (istruzione==null) return  ;
-
-        istruzione.esegui( sistema );
     }
 }

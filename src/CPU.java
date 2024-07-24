@@ -1,7 +1,4 @@
 public class CPU extends CPUEventFirer {
-    private String stato;
-    private int ciclo = 0;
-
     public Registro A;
     public Registro B;
     public Registro C;
@@ -13,12 +10,13 @@ public class CPU extends CPUEventFirer {
     public Registro MDR;
     public Registro MAR;
     public Registro RW;
+    private String stato;
+    private int ciclo = 0;
     private Sistema sistema;
     private Controller controller;
     private InstructionSet instructionSet = new InstructionSet(this);
 
     private String decodifica;
-    private int opCode;
 
     public CPU(Sistema sistema) {
         //this.controller = controller;
@@ -41,28 +39,32 @@ public class CPU extends CPUEventFirer {
     }
 
     public void avvia() {
+        Istruzione istruzione = null;
 
         while (true) {
-            fetch();
-            decode();
-            execute();
+
+            istruzione = fetch();
+            decode(istruzione);
+            execute(istruzione);
 
         }
     }
 
-    public void fetch() {
+    public Istruzione fetch() {
         stato = "FETCH";
-        ciclo=0;
+        ciclo = 0;
         letturaDaMemoria(IP, IR);
+
+        return instructionSet.getIstruzione(IR.getValore());
 
     }
 
-    public void decode() {
+    public void decode(Istruzione istruzione) {
         stato = "DECODE";
         ciclo = 0;
 
-        opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
-        decodifica = instructionSet.decodifica(opCode);
+        //opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
+        decodifica = istruzione.getDecodifica();
 
         inc(IP);
 
@@ -74,12 +76,12 @@ public class CPU extends CPUEventFirer {
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
     }
 
-    public void execute() {
+    public void execute(Istruzione istruzione) {
 
         stato = "EXECUTE";
         ciclo = 0;
 
-        instructionSet.esegui(opCode, controller.sistema );
+        istruzione.esegui(sistema);
 
         finitoCicloDiClock();
     }
