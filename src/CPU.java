@@ -145,8 +145,8 @@ public class CPU extends CPUEventFirer {
 
     }
     public void incRegistro(Registro registro){
-        int operando = registro.getValore() + 1;
-        registro.setValore(operando);
+        int valoreIncrementato = registro.getValore() + 1;
+        move(registro,valoreIncrementato);
     }
     public void decRegistro(Registro registro){
         int operando = registro.getValore() - 1;
