@@ -61,14 +61,18 @@ public class CPU extends CPUEventFirer {
         stato = "DECODE";
         ciclo = 0;
         //opCode = IR.getValore();
-        opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
 
+        opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
         decodifica = instructionSet.decodifica(opCode);
 
         int ipvalore = IP.getValore() + 1;
         move(IP,ipvalore);
 
-         fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
+        finitoCicloDiClock();
+    }
+
+    private void finitoCicloDiClock() {
+        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
         fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
     }
 
@@ -79,8 +83,7 @@ public class CPU extends CPUEventFirer {
 
         instructionSet.esegui(opCode, controller.sistema );
 
-        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
+        finitoCicloDiClock();
     }
 
     public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
@@ -93,15 +96,14 @@ public class CPU extends CPUEventFirer {
 
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
-        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
+        finitoCicloDiClock();
 
         incCiclo();
+
         //aspetta che la ram renda disponibile il dato
         sistema.leggeDallaMemoria(indirizzo);
 
-        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
+        finitoCicloDiClock();
 
         //ciclo = 2;
         incCiclo();
@@ -109,8 +111,7 @@ public class CPU extends CPUEventFirer {
         sistema.cpuHalettoDallaMemoria();
         move(MDR, registroDestinazione);
 
-        fireCpuHaFinitoCicloDiClockEvent(new CpuHaFinitoCicloDiClockEvent(this));
-        fireCpuAspettaImpulsoDiClockEvent(new CpuAspettaImpulsoDiClockEvent(this) );
+        finitoCicloDiClock();
 
     }
 
