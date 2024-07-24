@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Controller {
 
     public  static Sistema sistema;
-    private static Vista vista;
+    public static Vista vista;
 
     private ArrayList<Registro> utilizzati = new ArrayList<Registro>();
 
