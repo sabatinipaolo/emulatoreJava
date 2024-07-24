@@ -9,13 +9,15 @@ public class Vista implements CPUListener {
     private boolean enable;
 
 
-    public Vista() {
+    public Vista(Sistema sistema) {
+
+        this.sistema = sistema;
         enable = false;
+
+        setup();
     }
 
-    public void setup(Controller controller, Sistema sistema) {
-        this.sistema  = sistema;
-
+    public void setup( ) {
 
         viste = new HashMap<Registro, VistaRegistro>();
         viste.put(sistema.cpu.MAR, new VistaRegistro("MAR", sistema.cpu.MAR));

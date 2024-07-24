@@ -6,22 +6,14 @@ public class Controller {
     public static Vista vista;
     public static void main(String[] args) {
 
-        sistema = new Sistema( );
-        vista = new Vista();
-        Controller controller = new Controller(vista, sistema);
-
-        vista.setup(controller, sistema);
+        Sistema sistema= new Sistema( );
+        Vista vista= new Vista( sistema );
 
         sistema.addCPUListener(vista);
         sistema.cpu.addCPUListener(vista);
 
         vista.enable();
         vista.inizia();
-    }
-
-    public Controller (Vista v, Sistema s) {
-        this.sistema = s;
-        this.vista = v;
     }
 
 }
