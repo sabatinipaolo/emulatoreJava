@@ -30,7 +30,11 @@ class CpuHaFinitoCicloDiClockEvent extends CPUEvent {
     public CpuHaFinitoCicloDiClockEvent(Object source) {
 
         super(source);
+    }
+}
+class CpuAspettaImpulsoDiClockEvent extends CPUEvent {
+    public CpuAspettaImpulsoDiClockEvent (Object source) {
 
-
+        super(source);
     }
 }
