@@ -28,4 +28,10 @@ public class CPUEventFirer {
         }
     }
 
+    public void fireRegistroRead( RegistroReadEvent event){
+        for (CPUListener listener : listeners) {
+            listener.onRegistroRead(event);
+        }
+    }
+
 }

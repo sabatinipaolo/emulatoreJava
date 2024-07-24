@@ -14,7 +14,6 @@ public class Vista implements CPUListener {
     public void setup(Controller controller, Sistema sistema) {
         this.controller = controller;
 
-        sistema.cpu.addCPUListener(this);
 
         viste = new HashMap<Registro, VistaRegistro>();
         viste.put(controller.sistema.cpu.MAR, new VistaRegistro("MAR", controller.sistema.cpu.MAR));
@@ -223,10 +222,20 @@ public class Vista implements CPUListener {
 
         Registro registro = (Registro) event.getSource();
 
-        System.out.println( "#########################################################################################");
+        System.out.print ( "##### MODIFICATO " );
         viste.get(registro).stampa();
-        System.out.println( "#########################################################################################");
 
+        System.out.println();
+
+    }
+
+    @Override
+    public void onRegistroRead(RegistroReadEvent event) {
+        Registro registro = (Registro) event.getSource();
+
+        System.out.print ( "##### LETTO      " );
+
+        viste.get(registro).stampa();
 
         System.out.println();
 

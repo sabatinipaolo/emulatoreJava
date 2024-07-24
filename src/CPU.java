@@ -46,7 +46,7 @@ public class CPU extends CPUEventFirer {
             fetch();
             decode();
             execute();
-            fireCpuEvent(new CPUEvent( this));
+
         }
     }
 
@@ -83,11 +83,11 @@ public class CPU extends CPUEventFirer {
 
     public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
         //ciclo = 0;
-        int indirizzo = registroIndirizzo.getValore();
-        MAR.setValore(indirizzo);
-        RW.setToUno();
+        int indirizzo = getValore( registroIndirizzo );
 
-        fireRegistroChangedValue( new RegistroChangedEvent(this, IP));
+        move(MAR, registroIndirizzo.getValore());
+
+        move(RW , 1) ;
 
         sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
 
@@ -112,6 +112,13 @@ public class CPU extends CPUEventFirer {
         controller.cpuAspettaUnCicloDiClock();
     }
 
+    private int getValore(Registro registro) {
+        int valore = registro.getValore();
+        fireRegistroRead( new RegistroReadEvent(registro));
+        return valore;
+
+    }
+
     public String getStatoECiclo() {
         return stato + "-" + ciclo;
     }
@@ -121,9 +128,19 @@ public class CPU extends CPUEventFirer {
     }
 
     public void move(Registro sorg, Registro dest) {
-        dest.setValore(sorg.getValore());
-    }
 
+        dest.setValore(sorg.getValore());
+        fireRegistroRead(new RegistroReadEvent(sorg));
+        fireRegistroChangedValue(new RegistroChangedEvent(dest,dest.getValore()));
+
+
+    }
+    private void move (Registro registro , int valore){
+
+        registro.setValore(valore);
+        fireRegistroChangedValue(new RegistroChangedEvent(registro,valore));
+
+    }
     public void incRegistro(Registro registro){
         int operando = registro.getValore() + 1;
         registro.setValore(operando);
@@ -132,6 +149,7 @@ public class CPU extends CPUEventFirer {
         int operando = registro.getValore() - 1;
         registro.setValore(operando);
     }
+
 
     public boolean isInDecodeOrExecute() {
 

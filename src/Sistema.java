@@ -1,4 +1,4 @@
-public class Sistema implements  CPUListener {
+public class Sistema extends  CPUEventFirer implements  CPUListener {
 
     public CPU cpu;
     public Memory RAM;
@@ -13,6 +13,7 @@ public class Sistema implements  CPUListener {
 
         this.cpu.addCPUListener(this);
 
+
         this.RAM = new Memory(controller);
         this.addressBUS = new Registro( -1, controller);
         this.dataBUS = new Registro( -1, controller);
@@ -21,8 +22,19 @@ public class Sistema implements  CPUListener {
 
 
     public void cpuVuoleLeggereDallaMemoria(int indirizzo) {
-        controlRW.setToUno();
-        addressBUS.setValore(indirizzo);
+
+        setToUno( controlRW );
+        setToValore ( addressBUS , indirizzo);
+    }
+
+    private void setToValore(Registro registro, int valore) {
+        registro.setValore(0);
+        fireRegistroChangedValue( new RegistroChangedEvent(registro , valore));
+    }
+
+    private void setToUno(Registro registro) {
+        registro.setToUno();
+        fireRegistroChangedValue( new RegistroChangedEvent(registro , 1));
     }
 
 
@@ -30,6 +42,7 @@ public class Sistema implements  CPUListener {
         addressBUS.setToUndefined();
         controlRW.setToUndefined();
         int dato = RAM.getValore(indirizzo);
+
         dataBUS.setValore(dato);
         cpu.MDR.setValore(dato);
 
@@ -37,8 +50,7 @@ public class Sistema implements  CPUListener {
 
     public void cpuHalettoDallaMemoria() {
 
-       // addressBUS.setToUndefined();
-       // controlRW.setToUndefined();
+
         dataBUS.setToUndefined();
     }
 
@@ -60,7 +72,13 @@ public class Sistema implements  CPUListener {
     @Override
     public void onRegistroChanged(RegistroChangedEvent event) {
 
-        System.out.println( " SISTEMA : ricevuto RegistroChanged  Event");
+        System.out.println( " SISTEMA : ricevuto Registro CHANGED Event");
+
+    }
+
+    @Override
+    public void onRegistroRead(RegistroReadEvent event) {
+        System.out.println( " SISTEMA : ricevuto Registro READ   Event");
 
     }
 }

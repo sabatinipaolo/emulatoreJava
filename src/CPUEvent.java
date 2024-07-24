@@ -1,19 +1,28 @@
 import java.util.EventObject;
 
 public class CPUEvent extends EventObject {
-
+    public Registro registro;
     public CPUEvent(Object source) {
         super(source);
 
     }
 }
 class RegistroChangedEvent extends CPUEvent {
+    public int valore;
 
-    private Registro registro;
-    public RegistroChangedEvent(Object source, Registro registro) {
+    public RegistroChangedEvent(Object source, int valore) {
 
-        super(registro);
-        this.registro = registro;
+        super(source);
+        this.registro = (Registro) source;
+        this.valore = valore;
+
+    }
+}
+class RegistroReadEvent extends CPUEvent {
+    public RegistroReadEvent(Object source) {
+
+        super(source);
+        this.registro = ( Registro) source;
 
     }
 }
