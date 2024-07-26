@@ -12,8 +12,7 @@ public class InstructionSet {
         {
             int opCode = 0;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC A") {
-                public void esegui(Sistema sistema) {
-                    //sistema.cpu.inc(sistema.cpu.A);
+                public void esegui() {
                     cpu.A.inc();
                 }
 
@@ -23,7 +22,7 @@ public class InstructionSet {
         {
             int opCode = 1;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC B") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.B.inc();
                 }
 
@@ -33,7 +32,7 @@ public class InstructionSet {
         {
             int opCode = 2;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC C") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.C.inc();
                 }
             }));
@@ -42,7 +41,7 @@ public class InstructionSet {
         {
             int opCode = 3;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC D") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.D.inc();
                 }
             }));
@@ -52,7 +51,7 @@ public class InstructionSet {
         {
             int opCode = 4;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC A") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.A.dec();
                 }
 
@@ -62,7 +61,7 @@ public class InstructionSet {
         {
             int opCode = 5;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC B") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.B.dec();
                 }
 
@@ -72,7 +71,7 @@ public class InstructionSet {
         {
             int opCode = 6;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC C") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.C.dec();
                 }
             }));
@@ -81,7 +80,7 @@ public class InstructionSet {
         {
             int opCode = 7;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC D") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.D.dec();
                 }
             }));
@@ -90,14 +89,14 @@ public class InstructionSet {
         {
             int opCode = 8;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, [ ind ]") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
 
-                    sistema.cpu.letturaDaMemoria(sistema.cpu.IP, sistema.cpu.MAR); //legge operando
+                    cpu.letturaDaMemoria(cpu.IP, cpu.MAR); //legge operando
 
-                    sistema.cpu.incCiclo();
-                    sistema.cpu.letturaDaMemoria(sistema.cpu.MAR, sistema.cpu.A); // [operando] -> A
+                    cpu.incCiclo();
+                    cpu.letturaDaMemoria(cpu.MAR, cpu.A); // [operando] -> A
 
-                    sistema.cpu.incCiclo();
+                    cpu.incCiclo();
                     cpu.IP.inc();
 
 
@@ -109,7 +108,7 @@ public class InstructionSet {
         {
             int opCode = 17;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, B") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.A.muoviValoreIn(cpu.B);
                 }
             }));
@@ -118,7 +117,7 @@ public class InstructionSet {
         {
             int opCode = 18;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, C") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.A.muoviValoreIn(cpu.B);
                 }
             }));
@@ -127,7 +126,7 @@ public class InstructionSet {
         {
             int opCode = 19;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, D") {
-                public void esegui(Sistema sistema) {
+                public void esegui() {
                     cpu.A.muoviValoreIn(cpu.D);
 
                 }
@@ -140,7 +139,7 @@ public class InstructionSet {
     public Istruzione getIstruzione(int opCode) {
         Istruzione istruzione = istruzioni.get(opCode);
         if (istruzione == null) return (new Istruzione(opCode, "NOP ") {
-            public void esegui(Sistema sistema) {
+            public void esegui() {
             }
         });
         return istruzioni.get(opCode);

@@ -63,7 +63,7 @@ public class CPU extends CPUEventFirer {
         stato = "EXECUTE";
         ciclo = 0;
 
-        istruzione.esegui(sistema);
+        istruzione.esegui();
 
         finitoCicloDiClock();
     }
