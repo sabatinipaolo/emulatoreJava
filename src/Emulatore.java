@@ -7,9 +7,6 @@ public class Emulatore {
         Sistema sistema= new Sistema( );
         Vista vista= new Vista( sistema );
 
-        sistema.addCPUListener(vista);
-        sistema.cpu.addCPUListener(vista);
-
         vista.inizia();
     }
 

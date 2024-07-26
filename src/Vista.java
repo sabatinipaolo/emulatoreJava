@@ -10,7 +10,7 @@ public class Vista implements CPUListener {
     public Vista(Sistema sistema) {
 
         this.sistema = sistema;
-
+        sistema.cpu.addCPUListener(this);
         setup();
     }
 
@@ -259,7 +259,7 @@ public class Vista implements CPUListener {
         svuota(utilizzati);
         System.out.println("Controller. finita Cilco di clock " + sistema.cpu.getStatoECiclo());
 
-
+        //TODO: inserire aspettaComando ("", " ..... o invio per un ciclo di clock :")  ed eliminare aspettaimpulsodiclockevent
     }
 
     @Override
