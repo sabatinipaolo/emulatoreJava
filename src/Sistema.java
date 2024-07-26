@@ -26,12 +26,12 @@ public class Sistema extends CPUEventFirer implements CPUListener {
         setToValore(dataBUS, dato);
         setToValore(cpu.MDR, dato);
 
-        setToUndefined(addressBUS);
-        setToUndefined(controlRW);
+
     }
 
     public void cpuHalettoDallaMemoria() {
-
+        setToUndefined(addressBUS);
+        setToUndefined(controlRW);
         setToUndefined(dataBUS);
     }
 
