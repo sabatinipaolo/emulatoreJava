@@ -11,22 +11,23 @@ public class Sistema extends CPUEventFirer implements CPUListener {
        // this.cpu.addCPUListener(this);
     }
 
-    public void cpuVuoleLeggereDallaMemoria(int indirizzo) {
+    public void cpuVuoleLeggereDallaMemoria() {
 
         setToValore(controlRW, 1);
+
+        int indirizzo = cpu.MAR.getValore();  //
         setToValore(addressBUS, indirizzo);
     }
 
-    public void leggeDallaMemoria(int indirizzo) {
+    public void laMemoriaMetteIlDatoNelBusDati() {
 
-        setToUndefined(addressBUS);
-        setToUndefined(controlRW);
-
-        int dato = getValore(RAM.get(indirizzo));
+        int dato = getValore(RAM.get( addressBUS.getValore()));
 
         setToValore(dataBUS, dato);
         setToValore(cpu.MDR, dato);
 
+        setToUndefined(addressBUS);
+        setToUndefined(controlRW);
     }
 
     public void cpuHalettoDallaMemoria() {

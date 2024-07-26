@@ -68,20 +68,18 @@ public class CPU extends CPUEventFirer {
 
     public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
         //ciclo = 0;
-        int indirizzo = getValore(registroIndirizzo);
 
         move(MAR, registroIndirizzo.getValore());
 
         move(RW, 1);
 
-        sistema.cpuVuoleLeggereDallaMemoria(indirizzo);
+        sistema.cpuVuoleLeggereDallaMemoria();
 
         finitoCicloDiClock();
 
         incCiclo();
 
-        //aspetta che la ram renda disponibile il dato
-        sistema.leggeDallaMemoria(indirizzo);
+        sistema.laMemoriaMetteIlDatoNelBusDati();
 
         finitoCicloDiClock();
 
