@@ -29,7 +29,7 @@ public class CPU extends CPUEventFirer {
         while (true) {
 
             istruzione = fetch();
-            decode(istruzione);
+            istruzione = decode();
             execute(istruzione);
 
         }
@@ -40,20 +40,22 @@ public class CPU extends CPUEventFirer {
         ciclo = 0;
         letturaDaMemoria(IP, IR);
 
-        return instructionSet.getIstruzione(IR.getValore());
+        return instructionSet.getIstruzione(IR.getValore());  //OSS. non deve lanciare evento
 
     }
 
-    public void decode(Istruzione istruzione) {
+    public Istruzione decode() {
         stato = "DECODE";
         ciclo = 0;
 
-        //opCode = getValore(IR);  //serve campo per passala ad execute senza rovinare l'estetica di avvia()...
+        Istruzione istruzione = instructionSet.getIstruzione(IR.getValore());
         decodifica = istruzione.getDecodifica();
 
-        inc(IP);
+        IP.inc();
 
         finitoCicloDiClock();
+
+        return istruzione;
     }
 
     public void execute(Istruzione istruzione) {
@@ -69,25 +71,29 @@ public class CPU extends CPUEventFirer {
     public void letturaDaMemoria(Registro registroIndirizzo, Registro registroDestinazione) {
         //ciclo = 0;
 
-        move(MAR, registroIndirizzo.getValore());
+        int indirizzo = registroIndirizzo.muoviValoreIn( MAR );
 
-        move(RW, 1);
+        RW.setValore(1);
 
-        sistema.cpuVuoleLeggereDallaMemoria();
+        sistema.cpuVuoleLeggereDallaMemoria( indirizzo );
 
         finitoCicloDiClock();
 
         incCiclo();
 
-        sistema.laMemoriaMetteIlDatoNelBusDati();
+        //ciclo = 1;
+        int dato= sistema.laMemoriaMetteIlDatoNelBusDati();
+
+        MDR.setValore( dato );
 
         finitoCicloDiClock();
 
         //ciclo = 2;
         incCiclo();
 
+        MDR.muoviValoreIn( registroDestinazione );
+
         sistema.cpuHalettoDallaMemoria();
-        move(MDR, registroDestinazione);
 
         finitoCicloDiClock();
 
@@ -101,38 +107,6 @@ public class CPU extends CPUEventFirer {
         return decodifica;
     }
 
-    private int getValore(Registro registro) {
-        int valore = registro.getValore();
-        fireRegistroRead(new RegistroReadEvent(registro));
-        return valore;
-
-    }
-
-    public void move(Registro sorg, Registro dest) {
-
-        dest.setValore(sorg.getValore());
-        fireRegistroRead(new RegistroReadEvent(sorg));
-        fireRegistroChangedValue(new RegistroChangedEvent(dest, dest.getValore()));
-
-
-    }
-
-    private void move(Registro registro, int valore) {
-
-        registro.setValore(valore);
-        fireRegistroChangedValue(new RegistroChangedEvent(registro, valore));
-
-    }
-
-    public void inc(Registro registro) {
-        int valoreIncrementato = registro.getValore() + 1;
-        move(registro, valoreIncrementato);
-    }
-
-    public void decRegistro(Registro registro) {
-        int operando = registro.getValore() - 1;
-        registro.setValore(operando);
-    }
 
     public boolean isInDecodeOrExecute() {
 

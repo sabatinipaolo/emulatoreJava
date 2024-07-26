@@ -13,7 +13,8 @@ public class InstructionSet {
             int opCode = 0;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC A") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.inc(sistema.cpu.A);
+                    //sistema.cpu.inc(sistema.cpu.A);
+                    cpu.A.inc();
                 }
 
             }));
@@ -23,7 +24,7 @@ public class InstructionSet {
             int opCode = 1;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC B") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.inc(sistema.cpu.B);
+                    cpu.B.inc();
                 }
 
             }));
@@ -33,7 +34,7 @@ public class InstructionSet {
             int opCode = 2;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC C") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.inc(sistema.cpu.C);
+                    cpu.C.inc();
                 }
             }));
         }
@@ -42,7 +43,7 @@ public class InstructionSet {
             int opCode = 3;
             istruzioni.put(opCode, (new Istruzione(opCode, "INC D") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.inc(sistema.cpu.D);
+                    cpu.D.inc();
                 }
             }));
         }
@@ -52,7 +53,7 @@ public class InstructionSet {
             int opCode = 4;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC A") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.decRegistro(sistema.cpu.A);
+                    cpu.A.dec();
                 }
 
             }));
@@ -62,7 +63,7 @@ public class InstructionSet {
             int opCode = 5;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC B") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.decRegistro(sistema.cpu.B);
+                    cpu.B.dec();
                 }
 
             }));
@@ -72,7 +73,7 @@ public class InstructionSet {
             int opCode = 6;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC C") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.decRegistro(sistema.cpu.C);
+                    cpu.C.dec();
                 }
             }));
         }
@@ -81,7 +82,7 @@ public class InstructionSet {
             int opCode = 7;
             istruzioni.put(opCode, (new Istruzione(opCode, "DEC D") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.decRegistro(sistema.cpu.D);
+                    cpu.D.dec();
                 }
             }));
         }
@@ -97,7 +98,7 @@ public class InstructionSet {
                     sistema.cpu.letturaDaMemoria(sistema.cpu.MAR, sistema.cpu.A); // [operando] -> A
 
                     sistema.cpu.incCiclo();
-                    sistema.cpu.inc(sistema.cpu.IP);
+                    cpu.IP.inc();
 
 
                 }
@@ -109,7 +110,7 @@ public class InstructionSet {
             int opCode = 17;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, B") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.move(sistema.cpu.A, sistema.cpu.B);
+                    cpu.A.muoviValoreIn(cpu.B);
                 }
             }));
         }
@@ -118,7 +119,7 @@ public class InstructionSet {
             int opCode = 18;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, C") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.move(sistema.cpu.A, sistema.cpu.C);
+                    cpu.A.muoviValoreIn(cpu.B);
                 }
             }));
         }
@@ -127,7 +128,8 @@ public class InstructionSet {
             int opCode = 19;
             istruzioni.put(opCode, (new Istruzione(opCode, "MOV A, D") {
                 public void esegui(Sistema sistema) {
-                    sistema.cpu.move(sistema.cpu.A, sistema.cpu.D);
+                    cpu.A.muoviValoreIn(cpu.D);
+
                 }
             }));
         }

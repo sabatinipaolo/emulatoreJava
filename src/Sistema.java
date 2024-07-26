@@ -7,44 +7,28 @@ public class Sistema extends CPUEventFirer {
     Registro dataBUS=new Registro(-1);
 
 
-    public void cpuVuoleLeggereDallaMemoria() {
+    public void cpuVuoleLeggereDallaMemoria(int indirizzo ) {
 
-        setToValore(controlRW, 1);
+        controlRW.setValore(1);
 
-        int indirizzo = cpu.MAR.getValore();  //
-        setToValore(addressBUS, indirizzo);
+        addressBUS.setValore(indirizzo);
     }
 
-    public void laMemoriaMetteIlDatoNelBusDati() {
+    public int  laMemoriaMetteIlDatoNelBusDati() {
+        int indirizzo = addressBUS.getValore();
+        int dato = RAM.get( indirizzo ).getValore() ;
 
-        int dato = getValore(RAM.get( addressBUS.getValore()));
-
-        setToValore(dataBUS, dato);
-        setToValore(cpu.MDR, dato);
-
+        dataBUS.setValore( dato );
+        return dato;
 
     }
 
     public void cpuHalettoDallaMemoria() {
-        setToUndefined(addressBUS);
-        setToUndefined(controlRW);
-        setToUndefined(dataBUS);
+        addressBUS.setToUndefined();
+        controlRW.setToUndefined();
+        dataBUS.setToUndefined();
     }
 
-    private void setToValore(Registro registro, int valore) {
-        registro.setValore(valore);
-        fireRegistroChangedValue(new RegistroChangedEvent(registro, valore));
-    }
-
-    private int getValore(Registro registro) {
-        fireRegistroRead(new RegistroReadEvent(registro));
-        return registro.getValore();
-    }
-
-    private void setToUndefined(Registro registro) {
-        setToValore(registro, -1); //TODO: defininire costante per UNDEFINED
-
-    }
 
     public String getStatoCpu() {
         return cpu.getStatoECiclo();

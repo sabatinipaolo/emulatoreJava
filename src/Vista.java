@@ -33,6 +33,11 @@ public class Vista implements CPUListener {
         for (int i = 0; i < 16; i++) {
             viste.put(sistema.RAM.get(i), new VistaRegistro("[" + i + "]", sistema.RAM.get(i)));
         }
+
+        for (Registro r : viste.keySet()) {
+            r.addCPUListener(this);
+        }
+
     }
 
     public void inizia() {
