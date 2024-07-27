@@ -14,7 +14,7 @@ public class Vista implements CPUListener {
         setup();
     }
 
-    public void setup( ) {
+    private void setup( ) {
 
         viste = new HashMap<Registro, VistaRegistro>();
         viste.put(sistema.cpu.MAR, new VistaRegistro("MAR", sistema.cpu.MAR));
