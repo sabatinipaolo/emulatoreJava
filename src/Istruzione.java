@@ -12,10 +12,6 @@ public class Istruzione {
     }
 
     public void esegui() {
-        //TODO : un istruzione è della cpu ma viene eseguita su tutto il sistema
-        //esempio quelle che coinvolgono letture/scritture su RAM o output ...
-
-        System.out.println(" eseguo " + opCode + "  " + decodifica);
 
     }
 }
