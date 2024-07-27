@@ -21,23 +21,6 @@ public class InstructionSet {
             reg.put(3, "D");
         }
 
-
-        HashMap<Integer, String> regToReg = new HashMap<>();
-        {
-            regToReg.put(1, "A, B");
-            regToReg.put(2, "A,	C");
-            regToReg.put(3, "A,	D");
-            regToReg.put(4, "B,	A");
-            regToReg.put(6, "B,	C");
-            regToReg.put(7, "B,	D");
-            regToReg.put(8, "C,	A");
-            regToReg.put(9, "C,	B");
-            regToReg.put(11, "C, D");
-            regToReg.put(12, "D, A");
-            regToReg.put(13, "D, B");
-            regToReg.put(14, "D, C");
-        }
-
         //MOV reg ,reg
         {
             int opCodeBase = 0;
