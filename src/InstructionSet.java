@@ -84,7 +84,27 @@ public class InstructionSet {
         }
 
         //SUB reg,reg //TODO : completare con mod 256 e flag
+        //MOV reg,[indirizzo]
+        {
+            int opCodeBase = 16;
+            String istruzione = "MOV ";
+            int opCode;
+            for (int i = 0; i < 4; i++){
+                int opCodeDestinazione = i;
+                String decodifica = istruzione + decodificaRegistroInStringa[i] + ", [ indirizzo ]";
+                opCode = opCodeBase + opCodeDestinazione;
 
+                Registro regDst = decodificaRegistro[i];
+                System.out.println( i + "    > "+ opCode + " "+ decodifica );
+                istruzioni.put(opCode, (new Istruzione(opCode, decodifica) {
+                    public void esegui() {
+                        cpu.letturaDaMemoria(cpu.IP,cpu.MAR);
+                        cpu.letturaDaMemoria(cpu.MAR,regDst);
+                    }
+
+                }));
+            }
+        }
     }
 
     public static void main(String[] args) {

@@ -97,6 +97,8 @@ public class CPU extends CPUEventFirer {
 
         finitoCicloDiClock();
 
+        incCiclo();
+
     }
 
     public String getStatoECiclo() {
