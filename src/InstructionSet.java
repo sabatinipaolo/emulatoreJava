@@ -49,7 +49,7 @@ public class InstructionSet {
             }
         }
 
-        //ADD reg ,reg
+        //ADD reg ,reg //TODO : completare con mod 256 e flag
         {
             int opCodeBase = 32;
             int opCode;
@@ -82,6 +82,8 @@ public class InstructionSet {
 
 
         }
+
+        //SUB reg,reg //TODO : completare con mod 256 e flag
 
     }
 
