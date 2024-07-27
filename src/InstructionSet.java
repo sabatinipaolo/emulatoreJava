@@ -105,6 +105,29 @@ public class InstructionSet {
                 }));
             }
         }
+        //MOV reg,dato
+        {
+            int opCodeBase = 20;
+            String istruzione = "MOV ";
+            int opCode;
+            for (int i = 0; i < 4; i++){
+                int opCodeDestinazione = i;
+                String decodifica = istruzione + decodificaRegistroInStringa[i] + ", dato ";
+                opCode = opCodeBase + opCodeDestinazione;
+
+                Registro regDst = decodificaRegistro[i];
+                System.out.println( i + "    > "+ opCode + " "+ decodifica );
+                istruzioni.put(opCode, (new Istruzione(opCode, decodifica) {
+                    public void esegui() {
+                        cpu.letturaDaMemoria(cpu.IP,regDst);
+                        cpu.IP.inc();
+                    }
+
+                }));
+            }
+        }
+
+
     }
 
     public static void main(String[] args) {
